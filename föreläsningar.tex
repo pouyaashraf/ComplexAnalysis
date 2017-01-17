@@ -1,0 +1,255 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amssymb,
+			pgfplots,
+			mathtools,
+			amsthm,
+			tikz,
+			float,
+			hyperref,
+			paralist,
+			multicol,
+			fullpage,
+			subcaption,
+			esint,
+			wrapfig
+			}
+\usepackage[makeroom]{cancel}
+% \usepackage[English]{babel}
+\usepackage{fontspec}
+\usepackage[parfill]{parskip}
+
+%pgfplots defaults and fillbetween library
+\pgfplotsset{tikzDefaults/.style=
+				{
+				axis lines = middle,		%axis style
+				x label style={at={(axis description cs:1.0, 0.5)},anchor=west},
+				y label style={at={(axis description cs:0.5, 1.0)},anchor=south},
+				axis line style ={<->, color = black},
+				legend style = {draw=none},
+				legend columns = 2,
+				},
+			compat=1.8,
+			}
+\usepgfplotslibrary{fillbetween}
+
+%remove section numbers
+\setlength{\columnsep}{0.9cm}
+\setcounter{secnumdepth}{0}
+
+%styling for amsthm
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem} % reset theorem numbering for each chapter
+\newtheorem{cor}{Corollary}
+\newtheorem{rem}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{example}[section]{Example} % same for example numbers
+
+\newcommand{\gives}{\quad\Rightarrow\quad}
+\newcommand{\parder}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+
+\begin{document}
+
+	\thispagestyle{empty}
+	\begin{center}
+		\textsc{\Large Flervariabelanalys, 10HP 2013}\\[0.5cm] % Major heading such as course name
+		\textsc{\large }\\[0.5cm] % Minor heading such as course title
+		
+		%------------------
+		%	TITLE SECTION
+		%------------------
+		\HRule \\[0.4cm]
+		{ \huge \bfseries Föreläsningsanteckningar}\\[0.2cm] % Title of your document
+		
+		\HRule \\[1.5cm]
+		\large Pouya Ashraf\\[3cm]% Your name
+		
+		\parbox{12cm}{I detta dokument är föreläsningsanteckningar till kursen komplex analys, som gavs av Jörgen Östensson på Uppsala Universitet 2017. Samtliga figurer är ritade med vektorgrafik direkt i \LaTeX, så om något inte syns tydligt nog är det bara att zooma in utan att det blir grynigt (fantastiskt, eller hur?).}\\[3cm]
+
+
+		{\large \today} % Date
+
+		\newpage
+		\vspace*{\fill}
+			\parbox{12cm}{Uppskattar du att all info för kursen finns i detta dokument, så att du (kanske) slipper köpa kurslitteraturen? Känner du att du vill öka min livskvalitet litegrann som tack för arbetet jag lagt ner? Swisha valfri summa (typ 20-30kr) till \mbox{070-422 40 81}}\\
+		\vspace*{\fill}
+	\end{center}
+	\newpage
+
+	\pagenumbering{Roman}
+	\tableofcontents
+	\newpage
+	
+	\pagenumbering{arabic}
+	\section{Introduction} % (fold)
+	\label{sec:introduction}
+		\begin{definition}
+			A complex number is a number on the form $x+iy$, where $x,y\in\mathbb{R}$. Two omplex numbers $x_1+iy_1$, $x_2+iy_2$ are said to be equal iff. $x_1=x_2$ and $y_1=y_2$. The number $x$ is called the real part, and the number $y$ is called the imaginary part.
+
+			We write $x=\mathfrak{Re}(x+iy)$, $y=\mathfrak{Im}(x+iy)$. The set of complex numbers is denoted $\mathbb{C}$.
+
+			We define addition and multiplication as follows:
+			\begin{align*}
+				(x_1+iy_1)+(x_2+iy_2) &= (x_1+x_2) + i(y_1+y_2)\\
+				(x_1+iy_1)\cdot(x_2+iy_2) &= (x_1x_2-y_1y_2)+i(x_1y_2+x_2y_1)
+			\end{align*}
+			complex numbers are often denoted by $z$ or $w$.\\
+		\end{definition}
+
+			\begin{minipage}{0.55\textwidth}
+				\begin{definition}
+					The complex conjugate of $z=x+iy$ is denoted $\overline{z}$ and is defined by $\overline{z}=x-iy$. It holds that
+					\begin{align*}
+						\overline{z_1+z_2} &= \overline{z_1}+\overline{z_2}\\
+						\overline{z_1\cdot z_2} &= \overline{z_1}\cdot\overline{z_2}.
+					\end{align*}
+					Note also that $\mathfrak{Re}(z)=\dfrac{z+\overline{z}}{2}$, $\mathfrak{Im}=\dfrac{z-\overline{z}}{2i}$.
+
+					It is natural to represent a complex number $z=x+iy$ as a point $(x,y)\in\mathbb{R}^2$. Thus geometric representation is called the complex/Argand plane.
+				\end{definition}
+			\end{minipage}
+			\begin{minipage}{0.45\textwidth}
+				\begin{figure}[H]
+				 	\flushright
+				 	\begin{tikzpicture}[scale=0.9, transform shape]
+				 		\begin{axis}
+				 			[
+							% height = \textwidth,
+							% width = \textwidth,
+							ymin = -5, ymax = 5,
+							xmin = -5, xmax = 5,
+							% ytick = \empty,
+							% xtick= \empty,
+							xlabel = $\mathfrak{Re}$,
+							ylabel = $\mathfrak{Im}$,
+							tikzDefaults,
+							]
+
+        					\node[label={0:{$z_1=2+3i$}},circle,fill,inner sep=2pt] at (axis cs:2,3) {};
+
+        					\node[label={180:{$z_2=-1+i$}},circle,fill,inner sep=2pt] at (axis cs:-1,1) {};
+							
+				 		\end{axis}
+				 	\end{tikzpicture}
+				\end{figure}
+			\end{minipage}\\
+
+			\begin{definition}
+				The absolute value of a complex number $z=x+iy$ is denoted $|z|$, and is defined by $|z| = \sqrt{x^2+y^2}$. It holds that
+				\begin{align*}
+					|z|^2 &= z\cdot\overline{z}\\
+					|z_1\cdot z_2| &= |z_1|\cdot|z_2|
+				\end{align*}
+				Note also that every $z\in\mathbb{C},\:z\not= 0$ has a multiplicative inverse $\dfrac{1}{z}$ given by $\frac{1}{z}=\dfrac{\overline{z}}{|z|^2}$\\
+			\end{definition}
+
+			\begin{thm}[The Triangle Inequality]
+				For $z_1,\:z_2\in\mathbb{C}$ it holds that
+				\begin{align*}
+					|z_1+z_2|\le |z_1|+|z_2|
+				\end{align*}
+			\end{thm}
+
+			\begin{cor}
+				For $z_1,\:z_2\in\mathbb{C}$, it holds that
+				\begin{align*}
+					||z_1|-|z_2||\le |z_1|-|z_2|
+				\end{align*}
+			\end{cor}
+
+			\begin{proof}
+				\begin{align*}
+					|z_1| &= |(z_1-z_2)+z_2|\le|z_1-z_2|+|z_2|\\
+					&\Rightarrow |z_1|-|z_2|\le|z_1-z_2|
+				\end{align*}
+				Now let $z_1\longleftrightarrow z_2$
+			\end{proof}
+
+			\subsection{Polar form} % (fold)
+			\label{sub:polar_form}
+				Let $z=x+iy\not=0$. The point $\left(\dfrac{x}{|z|},\dfrac{y}{|z|}\right)$ lies on the unit circle, so $\exists\theta$ s.t. 
+				\begin{align*}
+					\frac{x}{|z|} = \cos(\theta)\quad\frac{y}{|z|} = \sin(\theta).
+				\end{align*}
+				Therefore $z=x+iy$ can be written as follows:
+				\begin{align*}
+					z=|z|(cos(\theta)+i\sin(\theta))
+				\end{align*}
+
+				Note that $r=|z|$ is uniquely determined by $z$, but $\theta$ is \textbf{not}. $\theta$ is only unique up to integer multiples of $2\pi$, i.e. if a particular $\theta$ suffices, then so does $\theta+2\pi n,\: n\in\mathbb{Z}$. We let all these numbers be denoted by $\arg(z)$
+
+				It is practical to have a notation for one of these values of $\arg(z)$. The so called \textbf{principal value} of $\arg(z)$, denoted $\mathrm{Arg}(z)$ is specified as the value of $\arg(z)$ which belongs to the interval $(-\pi,\pi]$.\\
+
+				\begin{example}
+					\begin{align*}
+						\arg(1+i) &= \{\frac{\pi}{4}+2\pi n\enskip|\enskip n\in\mathbb{Z}\}\\
+						\mathrm{Arg}(1+i) &= \frac{\pi}{4}
+					\end{align*}
+				\end{example}
+
+				\begin{rem}
+					One calls $\mathrm{Arg}(z)$ a \textbf{branch} of $\arg(z)$. Note that $\mathrm{Arg}(z)$ is 'discontinuous' along the negative real axis, which is called the branch cut of this function\\
+				\end{rem}
+
+				Suppose $z_1 = r_1(\cos(\theta_1)+i\sin(\theta_1))$, $z_2 = r_2(\cos(\theta_2)+i\sin(\theta_2))$, then
+				\begin{align*}
+					z_1z_2 &= r_1r_2(\cos(\theta_1)+i\sin(\theta_1))(\cos(\theta_2)+i\sin(\theta_2))\\
+					&= r_1r_2[(\cos(\theta_1)\cos(\theta_2)-\sin(\theta_1)\sin(\theta_2))\\\quad&+i(\sin(\theta_1)cos(\theta_2)+\cos(\theta_1)\sin(\theta_2))]\\
+					&= r_1r_2[\cos(\theta_1+\theta_2)+i\sin(\theta_1+\theta_2)]
+				\end{align*}
+
+				Correctly interpreted, then, $|z_1z_2| = |z_1||z_2|$, and $\arg(z_1z_2) = \arg(z_1)+\arg(z_2)$.
+
+				\begin{definition}[The exponential function]
+					For $z=x+iy$, let $e^z:=e^x(\cos(y)+i\sin(y))$\\
+				\end{definition}
+
+				\begin{rem}
+					Note that $e^z$ agrees with the 'usual' exponential function if $z\in\mathbb{R}$, i.e. the above definition extends the 'usual' exponential function to all of $\mathbb{C}$.
+				\end{rem}
+
+				Note in particular that $e^{iy}=\cos(y)+i\sin(y),\:y\in\mathbb{R}$ is called Euler's formula. In polar form, $z$ can be written as $z= r(\cos(\theta)+i\sin(\theta)) = re^{i\theta}$. Moreover, if $z_1=r_1r^{i\theta_1}$, $z_2=r_2e^{i\theta_2}$, then 
+				\begin{align*}
+					z_1z_2 &= r_1r_2e^{i\theta_1}e^{i\theta_2}\\
+					&= r_1r_2e^{i(\theta_1+\theta_2)}
+				\end{align*}
+				From this it follows that $e^{z_1}e^{z_2}?e^{z_1+z_2}$. Note also that $(e^{i\theta})^n = e^{i\theta}\cdot\ldots\cdot e^{i\theta} = e^{in\theta}$, i.e. $(\cos(\theta)+i\sin(\theta))^n = (\cos(n\theta)+i\sin(n\theta))$ [de Moivre's formula].
+			% subsection polar_form (end)
+
+			\subsection{The Logarithm Function} % (fold)
+			\label{sub:the_logarithm_function}
+				In real analysis, one defines the logarithm $\ln(x)$ as the inverse of the exponential function $e^x$, but the problem here is that $e^z$ is not an injective function (and has no inverse).
+
+				Given $z\in\mathbb{C}\setminus\{0\}$ one chooses the define $\log(z)$ as the set of all $w\in\mathbb{C}$ whose image is $z$ under the exponential function, i,e, $w=\log(z) \iff e^w=z$ (So $\log(z)$ is a multivalued function).
+
+				Write $z=re^{i\theta},\: w=u+iv$. Then 
+				\begin{align*}
+					e^w=z &\iff re^{i\theta}=e^re^{iv}\\
+					&\iff u=\log(r) = \log(|z|)
+					\shortintertext{and}
+					v=\theta&+2\pi k,\: k\in\mathbb{Z} = \arg(z)
+				\end{align*}
+				The explicit definition is:\\
+
+				\begin{definition}
+					For $z\not= 0$ we define $\log(z)$ as
+					\begin{align*}
+					 	\log(z) &= \ln(|z|)+i\arg(z)\\
+					 	&= \ln(|z|)+i \mathrm{Arg}(z+2\pi k),\:k\in\mathbb{Z}
+					 \end{align*} 
+				\end{definition}
+
+				\begin{example}
+					Compute $\log(1+i)$
+					\begin{align*}
+						\log{1+i} &= \ln(|1+i|)+i\arg(1+i)\\
+						&= \ln(\sqrt{2})+i(\frac{\pi}{4}+2\pi k),\:k\in\mathbb{Z}\\
+						&= \frac{1}{2}\ln{2}+i(\frac{\pi}{4}+2\pi k),\:k\in\mathbb{Z}
+					\end{align*}
+				\end{example}
+			% subsection the_logarithm_function (end)
+	% section introduction (end)
+\end{document}
