@@ -2,6 +2,7 @@
 \usepackage{amssymb,
 			pgfplots,
 			mathtools,
+			esint,
 			amsthm,
 			tikz,
 			float,
@@ -593,13 +594,17 @@
 		\begin{proof}
 			In view of the continuity of the first partial derivatives at $(x_0,y_0)$, it follows that:
 			\begin{align*}
-				u(x_0,y_0) + u(x_0+\Delta x,y_0+\Delta y) &= u_x(x_0,y_0)\Delta x + u_u(x_0,y_0)\Delta y + \sqrt{(\Delta x)^2+(\Delta y)^2}\rho_1(\Delta x,\Delta y)
+				u(x_0,y_0) + u(x_0+\Delta x,y_0+\Delta y) &= u_x(x_0,y_0)\Delta x + u_u(x_0,y_0)\Delta y\\ &+ 
+				\sqrt{(\Delta x)^2+(\Delta y)^2}\rho_1(\Delta x,\Delta y)
 				\intertext{and}
-				v(x_0,y_0) + v(x_0+\Delta x,y_0+\Delta y) &= v_x(x_0,y_0)\Delta x + v_y(x_0,y_0)\Delta y + \sqrt{(\Delta x)^2+(\Delta y)^2}\rho_2(\Delta x,\Delta y)
+				v(x_0,y_0) + v(x_0+\Delta x,y_0+\Delta y) &= v_x(x_0,y_0)\Delta x + v_y(x_0,y_0)\Delta y\\  &+ 
+				\sqrt{(\Delta x)^2+(\Delta y)^2}\rho_2(\Delta x,\Delta y)
 				\intertext{[See Calculus; $C^1$ implies differentiability]}
-				\Rightarrow f(z_0+\Delta z)-f(z_0) &= u_x(x_0,y_0)\Delta x + u_y(x_0,y_0)\Delta y + i(v_x(x_0,y_0)\Delta x + v_y(x_0,y_0)\Delta y)\\ &\:\:+
+				\Rightarrow f(z_0+\Delta z)-f(z_0) &= u_x(x_0,y_0)\Delta x + u_y(x_0,y_0)\Delta y\\  &\:\:+ 
+				i(v_x(x_0,y_0)\Delta x + v_y(x_0,y_0)\Delta y)\\ &\:\:+
 				\sqrt{(\Delta x)^2+(\Delta y)^2}(\rho_1(\Delta x, \Delta y)+ \rho_2(\Delta x, \Delta y))\\ &=
-				u_x(x_0,y_0)\Delta z + iv_x(x_0,y_0)\Delta z + |\Delta z|(\rho_1(\Delta x,\Delta y)+i \rho_2(\Delta x, \Delta y)).
+				u_x(x_0,y_0)\Delta z + iv_x(x_0,y_0)\Delta z \\ &\:\:+ 
+				|\Delta z|(\rho_1(\Delta x,\Delta y)+i \rho_2(\Delta x, \Delta y)).
 				\intertext{$\rho_1, \rho_2\to 0$ as $\Delta z\to 0$, which implies that}
 				f'(z_0) &= \lim\limits_{\Delta z\to 0}\frac{f(z_0+\Delta z)-f(z_0)}{\Delta z}
 				\intertext{exists, and is equal to}
@@ -1199,8 +1204,401 @@
 			\end{definition}
 
 			\begin{thm}
+			\label{thm:integrability}
 				If $f$ in continuous along $\gamma$, then $f$ is integrable.
 			\end{thm}
+
+			How do we compute it? First consider a segment of $\mathbb{R}$
+			\begin{align*}
+				\int\limits_{a}^{b}f(t)dt,\quad f=u+iv
+			\end{align*}
+			and $u,\:v$ continuous on $[a,b]$. Let $F(t)$ be an anti-derivative of $f(t)$, i.e. $F(t) = U(t)+iV(t)$, where $U'(t) = u(t)$ and $V'(t) = v(t)$, so
+			\begin{align*}
+				\int\limits_{a}^{b}f(t)dt = 
+				\int\limits_{a}^{b}u(t)+iv(t)dt =
+				\int\limits_{a}^{b}u(t)dt +
+				i\int\limits_{a}^{b}v(t)dt =
+				\left[U(t)\right]_a^b + i\left[V(t)\right]_a^b = F(b)-F(a).\\
+			\end{align*}
+
+			\begin{thm}
+				If $f$ is continuous on $[a,b]$ and $F'(t)=f(t)$ for $t\in[a,b]$, then
+				\begin{align*}
+					\int\limits_{a}^{b}f(t)dt = F(b)-F(a)
+				\end{align*}
+			\end{thm}
+
+			The integral along any directed smooth curve can be reduced to an integral on the above form by using a parameterization of the directed smooth curve $z(t,\: a\le t \le b)$.
+
+			Let $z_0 = z(t_0),\:z_1=z(t_1),\ldots,z_n = z(t_n)$, where $a=t_0<t_1<t_2<\ldots<t_n=b$. then
+			\begin{align*}
+				\sum\limits_{k=1}^{n}f(z_k)\Delta z_k &=
+				\sum\limits_{k=1}^{n}f(z(t_k))(z(t_k)-z(t_{k-1}))\tag*{Riemann sum for $f(z(t))z'(t)$}\\ &=
+				\sum\limits_{k=1}^{n}f(z(t_k))z'(t_k)\Delta t_k
+			\end{align*}
+			This suggests the following theorem:\\
+
+			\begin{thm}
+				Let $f$ be a continuous function on a directed smooth curve having admissible parameterization $z(t),\:a\le t\le b$. Then
+				\begin{align*}
+					\int\limits_{\gamma}f(z)dx = \int\limits_{a}^{b}f(z(t))z'(t)dt.\\
+				\end{align*}
+			\end{thm}
+
+			\begin{example}
+				compute
+				\begin{align*}
+					\int\limits_{C_r}(z-z_0)^ndz, \:n\in \mathbb{Z}
+				\end{align*}
+				over $C_r=\{z:|z-z_0|=r\}$, oriented counter-clockwise.
+
+				Solution: Let $z(t)=re^{it},\:0\le t\le 2\pi$. then $z'(t)=ire^{it}$, so
+				\begin{align*}
+					\int\limits_{C_r}(z-z_0)^ndz &= 
+					\int\limits_{0}^{2\pi}r^ne^{it}ire^{it}dt =
+					ir^{n+1}\int\limits_{0}^{2\pi}e^{i(n+1)t}dt\\ &=
+					\begin{cases}
+						ir^{n+1}\left[\dfrac{e^{i(n+1)t}}{i(n+1)}\right]_0^{2\pi}, &n\not=-1\\[0.3cm]
+						i2\pi, &n=-1
+					\end{cases}\\
+				\end{align*}
+
+				\begin{definition}
+					Suppose $\gamma=\gamma_1+\gamma_2+\ldots+\gamma_n$ and let $f$ be continuous on $\gamma$, then we let
+					\begin{align*}
+						\int\limits_{\gamma}f(z)dz = \sum\limits_{k=1}^{n}\int\limits_{\gamma_k}f(z)dz\tag*{and if $\gamma=z_0$ the integral vanishes identically.}\\
+					\end{align*}
+				\end{definition}
+			\end{example}
 		% subsection contour_integrals (end)
+
+		\subsection{ML-Inequality} % (fold)
+		\label{sub:ml_inequality}
+			Suppose $|f(z)\le M\:\forall Z\in \gamma$. Then
+			\begin{align*}
+				\left|\sum\limits_{k=1}^{n}f(z_k)\Delta z_k\right| \le
+				\sum\limits_{k=1}^{n}\left|f(z_k)\Delta z_k\right| \le
+				M\sum\limits_{k=1}^{n}\left|\Delta z_k\right| \le
+				M l(\gamma).
+			\end{align*}
+			Letting $\mu(P_n)\to 0$ leaves us with
+			\begin{align*}
+			\left|\int\limits_{\gamma}f(z)dz\right|\le ML,\: L=l(\gamma)
+			\end{align*}
+
+
+		\begin{thm}
+			Suppose $f$ is continuous on $\gamma$ and that $|f(z)|\le M\:\forall z\in \gamma$. Then
+			\begin{align*}
+				\left|\int\limits_{\gamma}f(z)dz\right|\le ML,\: L=l(\gamma)
+			\end{align*}
+		\end{thm}
+		% subsection ml_inequality (end)
 	% section complex_integration (end)
+	\section{Independence of Path, Cauchy's Integral Theorem} % (fold)
+	\label{sec:independence_of_path_cauchy_s_integral_theorem}
+		\subsection{Independence of Path} % (fold)
+		\label{sub:independence_of_path}
+			\begin{thm}
+				Suppose the $f$ is continuous in a domain $D$, and that $f$ has an anti-derivative $F$ in $D$, i.e. $F'(z) = f(z)\:\forall z\in D$. Let $\gamma$ be a contour in $D$ with initial point $z_i$ and terminal points $z_t$. Then
+				\begin{align*}
+					\int\limits_{\gamma}f(z)dz = F(z_t)-F(z_i)
+				\end{align*}
+			\end{thm}
+
+			\begin{proof}
+				\begin{align*}
+					\int\limits_{\gamma}f(z)dz =
+					\sum\limits_{k}\int\limits_{\gamma_k}f(z)dz =
+					\sum\limits_k \int\limits_{\tau_{k-1}}^{\tau_k}f(z(t))z'(t) dt
+				\end{align*}
+				where $z(t),\: \tau_{k-1}\le t\le \tau_k$ is a parameterization of $\gamma_k$. Now, $\frac{d}{dt}F(z(t)) = F'(z(t))z'(t)=f(z(t))z'(t)$. So by Theorem~\ref{thm:integrability} from the previous chapter, 
+				\begin{align*}
+					\int\limits_{\tau_{k-1}}^{\tau_k}f(z(t))z'(t)dt =
+					\left[F(z(t))\right]_{\tau_{k-1}}^{\tau_k} = F(z(\tau_k)) - F(z(\tau_{k-1})).
+				\end{align*}
+				Summing over $k$ yields our result.\\
+			\end{proof}
+
+			\begin{example}
+				\begin{multicols}{2}
+					Compute
+					\begin{align*}
+						\int\limits_{\gamma}\cos(z)dz
+					\end{align*}
+					with $\gamma$ as in figure.
+					\begin{figure}[H]
+						\begin{tikzpicture}[scale = 0.7, transform shape]
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -1, ymax = 2,
+								xmin = -2, xmax = 2,
+								ytick = {-1,1},
+								xtick= {-2,-1,1,2},
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								]
+
+								\addplot[thick, domain=0:pi]({cos(deg(x))},{sin(deg(x))});
+								\addplot[thick, domain=1:2]{x-1};
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				Solution:
+				\begin{align*}
+					\int\limits_{\gamma}\cos(z)dz = \left[\sin(z)\right]_{-1}^{2+i} = \sin(2+i)-\sin(-1).\\
+				\end{align*}
+			\end{example}
+
+			\begin{cor}
+				If $f$ is continuous in a domain $D$ and has an anti-derivative in $D$, then
+				\begin{align*}
+					\int\limits_{\gamma}f(z)dz = 0
+				\end{align*}
+				for any closed contour $\gamma\in D$.\\
+			\end{cor}
+
+			\begin{example}
+				Let $f(z)=z^n,\:n\not=1$, and let $\gamma$ be any closed contour not passing through the origin. Then
+				\begin{align*}
+					\int\limits_{\gamma}z^n dz = 0
+				\end{align*}
+				since $z^n$ has an anti-derivative $\frac{z^{n+1}}{n+1}$ in $\mathbb{C}\setminus\{0\}$.\\
+			\end{example}
+
+			\begin{thm}
+				Let $f$ be continuous in a domain $D$. Then the following are equivalent:
+				\begin{enumerate}[label=(\roman*)]
+					\item $f$ has an anti-derivative in $D$.
+					\item $\displaystyle\int\limits_{\gamma}f(z)dz=0$ for every closed contour $\gamma\in D$.
+					\item Contour integrals are independent of path in $D$. (i.e. if $\gamma_1$ and $\gamma_2$ are two contours with the same initial and terminal points, then the integrals give the same value).
+				\end{enumerate}
+			\end{thm}
+
+			\begin{proof}
+			~\\
+				\begin{itemize}
+					\item [$(i)\Rightarrow(ii)$] Shown above.
+					\item [$(i)\Rightarrow(iii)$] Shown above.
+					\item [$(ii)\Rightarrow(iii)$] Given $\gamma_1$ and $\gamma_2$, let $\gamma:=\gamma_1+(-\gamma_2)\Rightarrow$ the integral is identically zero.
+					\item [$(iii)\Rightarrow(i)$] Fix $z_0\in D$. This implies that for any $z\in D$ there exists a polygonal path $\gamma_z$ from $z_0$ to $z$. Define $F(z) = \displaystyle\int\limits_{\gamma_z}f(\zeta)d \zeta$. $F(z)$ is well-defined, i.e. independent of choice of $\gamma_z$, by $(iii)$.
+					\begin{align*}
+						\Rightarrow F(z+\Delta z) - F(z) &= 
+						\int\limits_{L}f(\zeta)d \zeta = 
+						\int\limits_{L}f(z)d \zeta + \int\limits_{L}(f(\zeta)-f(z))d \zeta\\ &=
+						f(z)\Delta z + \int\limits_{L}(f(\zeta)-f(z))d \zeta
+						\intertext{i.e.}
+						\frac{F(z+\Delta z)-F(z)}{\Delta z} &= 
+						f(z) + \frac{1}{\Delta z}\int\limits_{L}(f(\zeta)-f(z))d \zeta
+					\end{align*}
+					But by the ML-Inequality
+					\begin{align*}
+						\left|\frac{1}{\Delta z}\int\limits_{L}(f(\zeta)-f(z))d \zeta\right| \le
+						\frac{1}{\Delta z}\max\limits_{\zeta\in L}|f(\zeta)-f(z)| |\Delta z|\to 0
+					\end{align*}
+					as $\Delta z\to 0$ by the continuity of $f$. This implies that $F'(z)=f(z)$.
+				\end{itemize}
+			\end{proof}
+		% subsection independence_of_path (end)
+		\subsection{Cauchy's Integral Theorem} % (fold)
+		\label{sub:cauchy_s_integral_theorem}
+			Let $\gamma$ be a simple closed contour in $\mathbb{C}$ parameterized by $z(t),\:a\le t\le b$.
+			\begin{align*}
+				\Rightarrow \int\limits_{\gamma}f(z)dz &= 
+				\int\limits_{a}^{b}f(z(t))z'(t)dt = 
+				\int\limits_{a}^{b}[u(x(t),y(t))+iv(x(t),y(t))]\left(\frac{dx}{dt}+i \frac{dy}{dt}\right)dt \\ &=
+				\int\limits_{a}^{b}\left[u(x(t),y(t))\left(\frac{dx}{dt}\right)-v(x(t),y(t))\left(\frac{dy}{dt}\right)\right]dt\\ &+
+				i\int\limits_{a}^{b}\left[v(x(t),y(t))\left(\frac{dx}{dt}\right)-u(x(t),y(t))\left(\frac{dy}{dt}\right)\right]dt
+				\intertext{i.e.}
+				\int\limits_{\gamma}f(z)dz &=
+				\int\limits_{\gamma}udx-vdy + i\int\limits_{\gamma}vdx+udy.
+			\end{align*}
+
+			\begin{thm}[Green's Theorem]
+				Let $\vec{F}(x,y)=(F_1(x,y),F_2(x,y))$ be a $C^1$ vector field defined on a simply connected domain $D$, and let $\gamma$ be a positively oriented simple closed contour in $D$. Then
+				\begin{align*}
+					\int\limits_{\gamma}(F_1dx+F_2dy) = 
+					\iint\limits_{\Omega}\left(\frac{\partial F_2}{\partial dx}- \frac{\partial F_1}{\partial dy}\right)dxdy
+				\end{align*}
+				Where $\gamma = \partial \Omega$. 
+			\end{thm}
+
+			Let us use this expression for the integral of $f(z)$ over $\gamma$:
+			\begin{align*}
+				\int\limits_{\gamma}f(z)dz = 
+				\iint\limits_{\Omega}\left(- \frac{\partial v}{\partial x}- \frac{\partial u}{\partial y}\right)dxdy +
+				i \iint\limits_{\Omega}\left(\frac{\partial u}{\partial x}- \frac{\partial y}{\partial y}\right)dxdy.
+			\end{align*}
+			If we assume $u,v\in C^1$. If we moreover assume that $f$ is analytic in $D$, the entire integral vanishes identically in view of the Cauchy-Riemann Equations.\\
+
+			\begin{thm}[Cauchy's Integral Theorem]
+				Suppose that $f$ is analytic in a simply connected domain $D$ and let $\gamma$ be any closed contour in $D$. Then
+				\begin{align*}
+					\int\limits_{\gamma}f(z)dz = 0\\
+				\end{align*}
+			\end{thm}
+
+			\begin{rem}
+				The theorem generalizes the discussion thus far in two ways:
+				\begin{enumerate}[label=(\roman*)]
+					\item $\gamma$ can be any closed contour, i.e. need not be simple.
+					\item The assumption that $u,v\in C^1$ has been dropped.
+				\end{enumerate}
+
+				The fact that the second assumption can be dropped was proven by Edward Goursat. The Theorem is therefore often called the Cauchy-Goursat Theorem.\\
+			\end{rem}
+
+			\begin{rem}
+				The Theorem implies that if $f$ is analytic inside and on a simple closed contour, then the integral of $f$ along said contour is identically zero.\\
+			\end{rem}
+
+			\begin{thm}
+				Suppose $f$ is analytic in a simply connected domain. Then $f$ has an anti-derivative, contour integrals are path-independent, and integrals over closed contours vanish identically.\\
+			\end{thm}
+
+			\begin{example}
+				\begin{multicols}{2}
+					Consider the contours $\gamma$ (black) and $\gamma'$ (dashed) in the figure. Suppose that $f$ is analytic in a domain containing $\gamma$ and $\gamma'$, and the region between these two contours. (In the equations below, $\gamma_1,\:\gamma'_1$ denote the parts of the contours 'above' $\rho_1,\:\rho_2$ and $\gamma_2,\:\gamma'_2$ denote the parts of the contours 'below' $\rho_1,\:\rho_2$). By Cauchy's Integral Theorem
+					\begin{figure}[H]
+					\flushright
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -2.02, ymax = 2.02,
+								xmin = -2.02, xmax = 2.02,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								axis lines = none,
+								]
+
+								\addplot[thick, dashed, samples=100, domain=0:2*pi]
+									({0.5*cos(deg(x))},{0.5*sin(deg(x))}) node at (axis cs:0,0.7) {$\gamma'$};
+
+								\addplot[thick, samples=100, domain=0:2*pi]
+									({2*cos(deg(x))},{2*sin(deg(x))}) node at (axis cs:0,1.8) {$\gamma$};
+
+								\addplot[thick, dotted, domain=-2:-0.5]
+									{0} node at (axis cs:-1,0.3) {$\rho_1$};
+								\addplot[thick, dotted, domain=0.5:2]
+									{0} node at (axis cs:1,0.3) {$\rho_2$};
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				\begin{align*}
+						\int\limits_{\gamma_1} &+ 
+						\int\limits_{\rho_1} + 
+						\int\limits_{-\gamma'_1}+
+						\int\limits_{\rho_2} = 0\quad\quad\quad
+						\int\limits_{\gamma_2} + 
+						\int\limits_{\rho_2} + 
+						\int\limits_{-\gamma'_2}+
+						\int\limits_{\rho_1} = 0
+					\end{align*}
+					\begin{align*}
+						\Rightarrow \int\limits_{\gamma_1} + \int\limits_{\gamma_2} &=
+						 \int\limits_{-\gamma'_1} + \int\limits_{-\gamma'_2} \\
+						 \int\limits_{\gamma} &= \int\limits_{\gamma'}.
+					\end{align*}
+			\end{example}
+			So we can 'deform' the contour $\gamma$ into $\gamma'$ without affecting the integral. This illustrates the 'Deformation Theorem'.
+		% subsection cauchy_s_integral_theorem (end)
+	% section independence_of_path_cauchy_s_integral_theorem (end)
+	\section{Cauchy's Integral Formula and Applications} % (fold)
+	\label{sec:cauchy_s_integral_formula_and_applications}
+		\begin{thm}[Cauchy's Integral Formula]
+			Suppose $f$ is analytic in a simply connected domain $D$. Let $\gamma$ be a simple closed positively oriented contour in $D$. Moreover, let $z_0\in \gamma$. then
+			\begin{align*}
+				f(z_0) = \frac{1}{2\pi i}\int\limits_{\gamma}\frac{f(z)}{z-z_0}dz.
+			\end{align*}
+		\end{thm}
+
+		\begin{proof}
+			$\displaystyle \frac{f(z)}{z-z_0}$ is analytic in $D\setminus\{z_0\}$. As in the last example from the previous chapter, we see that
+			\begin{align*}
+				\int\limits_{\gamma}\frac{f(z)}{z-z_0}dz &= 
+				\int\limits_{C_r}\frac{f(z)}{z-z_0}dz =
+				\int\limits_{C_r}\frac{f(z_0)}{z-z_0}dz +
+				\int\limits_{C_r}\frac{f(z)-f(z_0)}{z-z_0}dz \\ &=
+				2\pi i f(z_0) + \int\limits_{C_r}\frac{f(z)-f(z_0)}{z-z_0}dz.
+			\end{align*}
+			Note: Clearly, the second term above is independent of $r$. So it is enough to show that
+			\begin{align*}
+				\lim\limits_{r\to 0}\int\limits_{C_r}\frac{f(z)-f(z_0)}{z-z_0}dz = 0.
+			\end{align*}
+			Let $M_r:=\max\limits_{z\in C_r}|f(z)-f(z_0)|$. $f$ is continuous, which implies that $M_r\to 0$ as $r\to 0^+$. So, by the ML-Inequality:
+			\begin{align*}
+				\left|\int\limits_{C_r}\frac{f(z)-f(z_0)}{z-z_0}dz\right|\le
+				\frac{M_r}{r}2\pi r \to 0.
+			\end{align*}
+		\end{proof}
+
+		\begin{rem}
+			$f(z_0)$ is determined by $f(z),\:z\in \gamma$. so, Cauchyäs formula says that
+			\begin{align*}
+				f(z) = \frac{1}{2\pi i}\int\limits_{\gamma}\frac{f(\zeta)}{\zeta-z}d \zeta\tag*{$z$ interior to $\gamma$.}
+			\end{align*}
+			By differentiability under the integral sign, it seems plausible that:\\
+		\end{rem}
+
+		\begin{thm}[Cauchy's Generalized Integral Formula]
+			If $f$ is analytic inside and on a simple closed positively oriented contour $\gamma$, and $z$ is a point interior to $\gamma$, then
+			\begin{align*}
+				f^{(n)}(z) = \frac{n!}{2\pi i}\int\limits_{\gamma}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d \zeta.
+			\end{align*}
+		\end{thm}
+
+		\begin{proof}
+			The proof is by induction by using the definition of the derivative..\\
+		\end{proof}
+
+		\begin{example}
+			\begin{multicols}{2}
+				Compute
+				\begin{align*}
+					\int\limits_{\gamma}\frac{2z+1}{z(z-1)^2}dz
+				\end{align*}
+				where $\gamma$ is as in the figure.
+				\begin{figure}[H]
+					\flushright
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -1.52, ymax = 1.52,
+								xmin = -1.02, xmax = 2.02,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+								]
+
+								\addplot[thick, samples=100, domain=0:2*pi]
+									({0.5+cos(deg(x))},{cos(deg(x))*sin(deg(x))}) node at (axis cs:0.5,0.7) {$\gamma$};
+
+								\node at (axis cs:-0.5,0.7) {$\gamma_2$};
+								\node at (axis cs:1.5,0.7) {$\gamma_1$};
+
+								\node[fill=black,circle,scale=0.3] at (axis cs:0,0) {};
+								\node[fill=black,circle,scale=0.3] at (axis cs:1,0) {};
+							\end{axis}
+					\end{tikzpicture}
+				\end{figure}
+			\end{multicols}
+		\end{example}
+	% section cauchy_s_integral_formula_and_applications (end)
 \end{document}
