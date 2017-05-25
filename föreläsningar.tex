@@ -1544,7 +1544,7 @@
 		\end{proof}
 
 		\begin{rem}
-			$f(z_0)$ is determined by $f(z),\:z\in \gamma$. so, Cauchyäs formula says that
+			$f(z_0)$ is determined by $f(z),\:z\in \gamma$. so, Cauchy's formula says that
 			\begin{align*}
 				f(z) = \frac{1}{2\pi i}\int\limits_{\gamma}\frac{f(\zeta)}{\zeta-z}d \zeta\tag*{$z$ interior to $\gamma$.}
 			\end{align*}
@@ -1576,7 +1576,7 @@
 								[
 								% height = \textwidth,
 								% width = \textwidth,
-								ymin = -1.52, ymax = 1.52,
+								ymin = -0.8, ymax = 0.8,
 								xmin = -1.02, xmax = 2.02,
 								ytick = \empty,
 								xtick= \empty,
@@ -1590,8 +1590,8 @@
 								\addplot[thick, samples=100, domain=0:2*pi]
 									({0.5+cos(deg(x))},{cos(deg(x))*sin(deg(x))}) node at (axis cs:0.5,0.7) {$\gamma$};
 
-								\node at (axis cs:-0.5,0.7) {$\gamma_2$};
-								\node at (axis cs:1.5,0.7) {$\gamma_1$};
+								\node at (axis cs:-0.7,0.3) {$\gamma_2$};
+								\node at (axis cs:1.7,0.3) {$\gamma_1$};
 
 								\node[fill=black,circle,scale=0.3] at (axis cs:0,0) {};
 								\node[fill=black,circle,scale=0.3] at (axis cs:1,0) {};
@@ -1599,6 +1599,82 @@
 					\end{tikzpicture}
 				\end{figure}
 			\end{multicols}
+			Note that $\gamma=\gamma_1+\gamma_2$, and $\gamma_1,\:\gamma_2$ are simple closed contours.
+			\begin{align*}
+				\int\limits_{\gamma}f(z)dz &= 
+				\int\limits_{\gamma_1}\frac{\frac{2z+1}{z}}{(z-1)^2}dz + 
+				\int\limits_{\gamma_2}\frac{\frac{2z+1}{(z-1)^2}}{z}dz \\ &=
+				2\pi i \frac{d}{dz}\left(\frac{2z+1}{z}\right)\Bigg|_{z=1} - 
+				2\pi i \left(\frac{2z+1}{(z-1)^2}\right)\Bigg|_{z=0} \\ &=
+				-4\pi i.\\
+			\end{align*}
 		\end{example}
+
+		\begin{thm}
+			If $f$ is analytic in a domain $D$, then \underline{all} derivatives $f,\:f',\:f'',\ldots$ exist in $D$ and are analytic in $D$.
+		\end{thm}
+
+		\begin{proof}
+			Apply Cauchy's Generalized Integral Formula in a positively oriented contour (circle) around an arbitrary point $z_0\in D$.
+		\end{proof}
+
+		So, in particular, if $f$ is analytic, then $f'$ is analytic as well.
+
+		Suppose $f$ is analytic. Then $f'(z) = u_x+iv_x = v_y-iu_y$ by Cauchy-Riemann equations. Since $f'$ is analytic, hence continuous, it follows that $u,v\in C^1$. Since $f''$ exists and is continuous; and moreover $f''(z)=u_{zz}+iv_{xx} = v_{xy}-iu_{xy}$. It follows that all second order derivatives are continuous, etc.\\
+
+		\begin{thm}
+			If $f=u+iv$ is analytic, then $u,v\in C^\infty(D)$.\\
+		\end{thm}
+
+		\begin{rem}
+			This completes the proof that $u,v$ are harmonic functions. Suppose $f$ is continuous in $D$ and that
+			\begin{align*}
+				\int\limits_{\gamma}f(z)dz = 0
+			\end{align*}
+			for all closed contours $\gamma\in D$. Independence of path theorem implies that $f$ has an anti-derivative in $D$, i.e. $F'=f$ in D. Since $F$ is analytic, this implies that $F'=f$ is analytic.\\
+		\end{rem}
+
+		\begin{thm}[Morera]
+			If $f$ is continuous in a domain $d$, and
+			\begin{align*}
+				\int\limits_{\gamma}f(z)dz=0
+			\end{align*}
+			for all closed contours $\gamma\in D$, then $f$ is analytic in $D$
+		\end{thm}
+		\subsection{Consequences of Cauchy's Generalized Integral Formula} % (fold)
+		\label{sub:consequences_of_cauchy_s_generalized_integral_formula}
+			\begin{thm}[Cauchy Estimate]
+				Let $f$ be analytic inside and on a circle $C_R$ of radius $R$ centered at $z_0$. Suppose $|f(z)|\le M\:\forall z\in C_R$. Then
+				\begin{align*}
+					\left|f^{(n)}(z_0)\right|\le \frac{n!M}{R^n}\tag*{$\forall n\in \mathbb{N}$}
+				\end{align*}
+			\end{thm}
+			\begin{proof}
+				Give $C_r$ a positive orientation. Apply Cauchy's Generalized Integral Formula
+				\begin{align*}
+					f^{(n)}(z) &= 
+					\frac{n!}{2\pi i}\int\limits_{C_r}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d \zeta,\tag*{$\zeta\in C_r$}\\
+					\left|\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\right| &\le \frac{M}{R^{n+1}}
+					\intertext{so, by the ML-Inequality}
+					\left|f^{(n)}(z_0)\right|\le \frac{n!}{2\pi i}\frac{M}{r^{n+1}}2\pi R = \frac{n!M}{R^n}.
+				\end{align*}
+			\end{proof}
+
+			Suppose $f$ is an entire function, $|f(z)|\le M\:\forall z\in \mathbb{C}$. Then a Cauchy-estimate implies
+			\begin{align*}
+				|f'(z_0)|\le \frac{M}{R}\:\forall R \Rightarrow |f'(z_0)| =0
+			\end{align*}
+			i.e. $f'(z_0)=0$. Since $z_0$ was arbitrary $f'(z)=0\:\forall z\in \mathbb{C}\Rightarrow f$ constant in $\mathbb{C}$.\\
+
+			\begin{thm}[Liouville's Theorem]
+				The only bounded entire functions are the constant functions.
+			\end{thm}
+		% subsection consequences_of_cauchy_s_generalized_integral_formula (end)
 	% section cauchy_s_integral_formula_and_applications (end)
+	\section{Applications to Harmonic Functions} % (fold)
+	\label{sec:applications_to_harmonic_functions}
+		\begin{thm}
+			
+		\end{thm}
+	% section applications_to_harmonic_functions (end)
 \end{document}
