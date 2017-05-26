@@ -1656,7 +1656,7 @@
 					\frac{n!}{2\pi i}\int\limits_{C_r}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d \zeta,\tag*{$\zeta\in C_r$}\\
 					\left|\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\right| &\le \frac{M}{R^{n+1}}
 					\intertext{so, by the ML-Inequality}
-					\left|f^{(n)}(z_0)\right|\le \frac{n!}{2\pi i}\frac{M}{r^{n+1}}2\pi R = \frac{n!M}{R^n}.
+					\left|f^{(n)}(z_0)\right| &\le \frac{n!}{2\pi i}\frac{M}{r^{n+1}}2\pi R = \frac{n!M}{R^n}.
 				\end{align*}
 			\end{proof}
 
@@ -1671,10 +1671,306 @@
 			\end{thm}
 		% subsection consequences_of_cauchy_s_generalized_integral_formula (end)
 	% section cauchy_s_integral_formula_and_applications (end)
-	\section{Applications to Harmonic Functions} % (fold)
+	\section{The Fundamental Theorem of Algebra and Applications to Harmonic Functions} % (fold)
 	\label{sec:applications_to_harmonic_functions}
-		\begin{thm}
-			
+		\begin{thm}[Fundamental Theorem of Algebra]
+			Every non-constant polynomial with complex coefficients has at least one (1) zero.
 		\end{thm}
+
+		\begin{proof}
+			Let $p(z) =a_nz^n+a_{n-1}z^{n-1}+\ldots+a_0,\:a_n\not=0$. Suppose $p(z)$ has no zeros. Put $f(z)=(p(z))^{-1}$. Then $f$ is entire. We next show that $f(z)$ is bounded.
+			\begin{enumerate}
+				\item 
+				\begin{align*}
+					p(z) &= z^n\left(a_n+ \frac{a_{n-1}}{z}+\ldots + \frac{a_0}{z^n}\right),
+					\quad p(z)\to a_n\text{ as }z\to\infty\\
+					&\Rightarrow \exists \varphi: |z|\ge \varphi \Rightarrow \left|\frac{p(z)}{z^n}\right|\ge \frac{|a_n]}{z^n}\\
+					&\Rightarrow |f(z)| = \frac{1}{|p(z)|}\le \frac{2}{|z|^n|a_n|}\le \frac{2}{\varphi^n|a_n|},\:|z|\ge \varphi
+				\end{align*}
+				\item For $|z|\le \varphi$ the function $|f(z)|$ is a continuous functions on a compact set, which means it must have an upper bound said set ($|z|\le \varphi$). This implies that $\frac{1}{p(z)}$ is a bounded entire function, hence constant by Liouville's Theorem. This in turn implies $p(z)$ is constant, meaning $n=0$.
+			\end{enumerate}
+			In other words: The only polynomials without zeros are the constant polynomials.
+		\end{proof}
+		\subsection{The Mean-Value Property and Maximum Modulus Principle} % (fold)
+		\label{sub:the_mean_value_property}
+			Suppose $f$ is analytic inside and one a circle $C_R$ of radius $R$ centered at $z_0$. By Cauchy's Integral Formula,
+			\begin{align*}
+				f(z_0) &= \frac{1}{2\pi i}\oint\limits_{C_R}\frac{f(z)}{z-z_0}dz.
+				\intertext{Parameterize $C_R: z(t)=z_0+Re^{it},\:t\in[0,2\pi]$.}
+				&= \frac{1}{2\pi i}\int\limits_{0}^{2\pi}\frac{f(z_0+Re^{it})}{Re^{it}}iRe^{it}dt = \frac{1}{2\pi i}\int\limits_{0}^{2\pi}f(z_0+Re^{it})dt.\tag*{(*)}
+			\end{align*}
+			(*) is called the 'mean value property'.\\
+
+			\begin{lemma}
+				Suppose $f$ is analytic in a disk centered at $z_0$, sat $D(z_0)$. Suppose also that
+				\begin{align*}
+					\max\limits_{z\in D(z_0)}|f(z)| &= |f(z_0)|
+					\intertext{Then}
+					|f(z)| &= |f(z_0)|\quad \forall z\in D(z_0)
+				\end{align*}
+			\end{lemma}
+
+			\begin{proof}
+				Suppose $|f(z)|$ is \underline{not} constant. Then $\exists z_1\in D(z_0)$ s.th. $|f(z_1)|<|f(z_0)|$. Let $C_R$ be the circle with center in $z_0$ passing through $z_1$. By assumption, $|f(z)|\le |f(z_0)|\:\forall z\in C_R$. Since $f$ is continuous, there exists a segment of $C_R$ containing $z_1$ in which $|f(z)|<|f(z_0)|$. Say that $|f(z)|<|f(z_0)|-2\pi \varepsilon$ on a segment of length $\delta$.
+				\begin{align*}
+					\Rightarrow |f(z_0)| &= \left|\frac{1}{2\pi}\int\limits_{0}^{2\pi}f(z_0+Re^{it})dt\right|
+					\tag*{By the mean-value-property}\\ &\le
+					\frac{1}{2\pi}\int\limits_{0}^{2\pi}|f(z_0+Re^{it})|dt\\ &< 
+					\frac{1}{2\pi}\left(|f(z_0)|(2\pi- \delta)+(|f(z_0)|-2\pi \varepsilon)\delta\right)\\ &=
+					|f(z_0)|-\varepsilon \delta.
+				\end{align*}
+				Which is a contradiction.
+			\end{proof}
+			\begin{thm}[The Maximum Modulus Principle]
+				If $f$ is analytic in a domain $D$ and $|f(z)|$ attains its maximum value at a point $z_0\in D$, then $f$ is constant in $D$.
+			\end{thm}
+
+			\begin{proof}
+				We show that $|f|$ is constant in $D$. The result then follows from the Cauchy-Riemann Equations. Suppose that $|f(z)|$ is \underline{not} constant. This implies
+				\begin{align*}
+					\exists z_1\in D: |f(z_1)|<|f(z_0)|.
+				\end{align*}
+				Let $\gamma$ be a polygonal path from $z_0$ to $z$. We consider now the values of $|f(z)|$ for $z$ on $\gamma$, starting at $z_0$. Then $\exists w\in \gamma$ s.th.
+				\begin{enumerate}[label=(\roman*)]
+					\item $|f(z)| = |f(z_0)|,\:\forall z$ preceding $z\in \gamma$.
+					\item $\exists$ points $z\in \gamma$ arbitrarily close to $w\in \gamma$ s.th. $|f(z)|<|f(z_0)|$
+				\end{enumerate}
+				follows from the supremum property of $\mathbb{R}$. Parameterize $\gamma$ s.th. $z=z(t),\:t|in[0,1],\:z(0)=z_0,\:z(1)=z_1$. Let $M$ be the set
+				\begin{align*}
+				 	M=\{z\in[0,1]: |f(z(t))|<|f(z)|\}.
+				 \end{align*} 
+				 We know that $M\not=\emptyset$ since $1\in M$, and $M$ is bounded below by 0. Let $\alpha=\inf(M)$ (greatest lower bound). Put $w=f(z(\alpha))$.
+				 \begin{enumerate}[label=(\roman*)]
+				 	\item $\alpha$ is a lower bound implies that for all $t\in M$ it holds that $\alpha\le t$
+				 	\begin{align*}
+				 		\Rightarrow &t<\alpha \Rightarrow t\not\in M,\text{ i.e. } |f(z(t))|=|f(z)|\\
+				 		\Rightarrow &(i)\text{ holds true}.
+				 	\end{align*}
+
+				 	\item $\alpha$ is the greatest lower bound
+				 	\begin{align*}
+				 		\Rightarrow \forall \beta>\alpha\:\exists t\in M: t<\beta,
+				 	\end{align*}
+				 	i.e. there are points $t$ with $|f(z(0))|<|f(z_0)|$. So (ii) holds.
+				 \end{enumerate}
+				 Since $f$ is continuous, (i) implies  $|f(w)|=|f(z_0)|$. There exists $D(w)$ contained in $D$. By lemma, $|f(z)|$ is constant in $D(w)$, but this contradicts (ii). Thus the assumption the $|f|$ is not constant is false.
+			\end{proof}
+
+			Now, suppose $f$ is analytic in a bounded domain $D$, and that $f$ is continuous up to $\partial D$. This implies that $|f|$ attains a maximum value in $\bar{D}$.\\
+
+			\begin{thm}
+				A function which is analytic in a bounded domain $D$ and continuous up to $\partial D$ attains its maximum and minimum modulus on the boundary\\
+			\end{thm}
+
+			Recall that if $\phi$ is a harmonic function in a simply connected domain $D$, then there exists a function $f$ such that $\Re(f)=\phi$. Now, we prove the above theorem:
+
+			\begin{proof}
+				If there is such an $f$, say $f=\phi+i\psi$, then $f' = \phi_x+i\psi_y = \phi_x-i\phi_y$. So, put $g(z) = \phi_x - i\phi_y$. Then
+				\begin{align*}
+					\begin{cases}
+						(\phi_x)_x = (-\phi_y)_y; & \phi\: \mathrm{harmonic}\\
+						(\phi_x)_y = -(-\phi_y)_x; &\phi\in C^2
+					\end{cases}\Rightarrow
+					\text{Cauchy-Riemann Equations satisfied}
+				\end{align*}
+				Also, $g^{\mathrm{s}}$ real and imaginary parts are $C^1$ since $\phi\in C^2$. This implies the following:
+				\begin{itemize}
+					\item $g(z)$ is analytic in a simply connected domain.
+					\item $g$ has an anti-derivative $G\in D$, $G=u+iv$, since $G'=g$.
+					\item $u_x-iu_y = \phi_x-i\phi_y$
+					\item $(\phi-u)_x = (\phi-u)_y=0\Rightarrow (\phi-u)$ is some constant $c\in \mathbb{R}$
+				\end{itemize}
+				Now put $f(z)=g(z)+c$ and the result follows.
+			\end{proof}
+
+			\begin{thm}[Maximum Principle for Harmonic Functions]
+			\label{thm:harmonic_maximum_principle}
+				If $\phi$ is harmonic in a simply connected domain $D$ and attains its maximum or minimum at some point inside the domain, then $\phi$ is constant.
+			\end{thm}
+
+			\begin{proof}
+				Let $\phi$ be harmonic in a simply connected domain $D$ and let $f=\phi+i\psi$ be analytic in $D$. Then
+				\begin{align*}
+					|e^f| = |e^{\phi+i\psi}| = |e^\phi|.
+				\end{align*}
+				The exponential function is monotonically increasing, so if $\phi$ has maximum in $D$, then so will $|e^f|$. This implies that $e^f$ is constant by the Maximum Modulus Principle.
+			\end{proof}
+
+			\begin{thm}
+			\label{thm:hamonic_maximum_on_boundary}
+				If $\phi$ is harmonic in a bounded simply connected domain $D$, and continuous up to $\partial D$, then $\phi$ attains its maximum and minimum on $\partial D$.
+			\end{thm}
+
+			\begin{proof}
+				Since $\phi$ attains its minimum precisely when $-\phi$ attains its maximum, this implies the corresponding minimum principle.
+			\end{proof}
+		% subsection the_mean_value_property (end)
 	% section applications_to_harmonic_functions (end)
+	\section{More on Analytic Functions and Notions of Convergence} % (fold)
+	\label{sec:more_on_analytic_functions_and_notions_of_convergence}
+		We begin by making a remark on Theorems~\ref{thm:harmonic_maximum_principle} and~\ref{thm:hamonic_maximum_on_boundary} from the last chapter. In the formulation of the two theorems, the assumption of simple connectedness is not necessary (the first theorem gives an analog of a Lemma from the same chapter, then argue similarly as in the proof of the Maximum Modulus Principle).
+
+		Recall now the Dirichlet problem; the problem of finding a function $\phi(x,y)$ which is harmonic in a domain $D$, and continuous up to $\partial D$, with given values on $\partial D$. An interesting question to pose is: 'Is there a solution to Dirichlet's Problem, and if so: is it unique?'. The above implies uniqueness for bounded domains.\\
+
+		\begin{thm}
+			Let $\phi_1(x,y)$ and $\phi_2(x,y)$ be harmonic in a bounded domain $D$, and continuous up to $\partial D$, s.th. $\phi_1 = \phi_2$ on $\partial D$. Then $\phi_1\equiv \phi_2$ in $D$.
+		\end{thm}
+
+		\begin{proof}
+			Let $\phi = \phi_1-\phi_2$. By Theorem~\ref{thm:hamonic_maximum_on_boundary}, $\phi$ is harmonic and attains both maximum and minimum on $\partial D$. But $\phi=0$ on $\partial D$, so $\phi_1=\phi_2$.
+		\end{proof}
+
+		An explicit solution can be found if e.g. $D$ is a disk.
+
+		\subsection{Poisson's Integral Formula} % (fold)
+		\label{sub:poisson_s_integral_formula}
+			Suppose $f=\phi+i\psi$ is analytic inside and on the circle $C_R$ centered at the origin and with radius $R$. then, by Cauchy's Integral Formula
+			\begin{align*}
+				f(z) = \frac{1}{2\pi i}\oint\limits_{C_R}\frac{f(\zeta)}{\zeta-z}dz.
+			\end{align*}
+			Let $z^*,\:z$ be symmetric w.r.t. $C_R$, i.e.
+			\begin{align*}
+				(z^*-0)\overline{(z-0)} = R^2 \iff z^* = \frac{R^2}{\bar{z}}.
+			\end{align*}
+			Then $z^*>R$, so by Cauchy's theorem
+			\begin{align*}
+				f(z) &= 
+				\frac{1}{2\pi i}\oint\limits_{C_R}\left(\frac{f(\zeta)}{\zeta-z}- \frac{f(\zeta)}{\zeta-z^*}\right)dz =
+				\frac{1}{2\pi i}\oint\limits_{C_R}\frac{R^2-|z|^2}{(\zeta-z)(R^2-\bar{z}\zeta)} f(\zeta)d \zeta	\\ &=
+				\frac{1}{2\pi i}\int\limits_{0}^{2\pi}\frac{R^2-|z|^2}{(Re^{it}-z)(R^2-\bar{z}Re^{it})}f(Re^{it})iRe^{it}dt \\ &=
+				\frac{R^2-|z|^2}{2\pi}\int\limits_{0}^{2\pi}\frac{f(Re^{it})}{|Re^{it}-z|^2}dt
+			\end{align*}
+			Taking the real part and identifying $(x,y)$ with $re^{it}$ yields
+			\begin{align*}
+				\phi(re^{it}) = \frac{R^2-r^2}{2\pi}\int\limits_{0}^{2\pi}\frac{\phi(Re^{it})}{R^2-2R\cos(z-\theta)+r^2}dt
+			\end{align*}
+		% subsection poisson_s_integral_formula (end)
+		\subsection{Sequences and Series of Functions, Uniform Convergence} % (fold)
+		\label{sub:sequences_and_series_of_functions_uniform_convergence}
+			In Section~\ref{sec:topology_of_the_complex_plane} we defined what is meant by convergence of a sequence of complex numbers. Recall that the sequence $\{a_n\}_{n=0}^\infty$ has a limit $a$ if for $\varepsilon>0\:\exists N: n>N\Rightarrow |a_n-a|<\varepsilon$.\\
+
+			\begin{definition}
+				A series if a formal expression of the form 
+				\begin{align*}
+					c_0+c_1+c_2+\ldots+c_j+\ldots \iff \sum\limits_{j=0}^{\infty}c_j\tag*{$c_j\in \mathbb{C}$}
+				\end{align*}
+				The $n^{\mathrm{th}}$ partial sum of the series, $s_n$, is the sum
+				\begin{align*}
+					\sum\limits_{j=0}^{n}c_j
+				\end{align*}
+				of the first $n+1$ terms. If $\{s_n\}_{n=0}^{\infty}$ has a limit $s$, then the series is said to converge to $s$. In this case, we say that
+				\begin{align*}
+					s = \sum\limits_{j=0}^{\infty}c_j.
+				\end{align*}
+				If the series does not converge, it is said to diverge.\\
+			\end{definition}
+
+			\begin{example}
+				The following holds:
+				\begin{align*}
+					\sum\limits_{j=0}^{\infty}c^j = \frac{1}{1-c},\quad |c|<1.
+				\end{align*}
+			\end{example}
+
+			\begin{proof}
+				\begin{align*}
+					(1-c)(1+c+\ldots+c^{n-1}+c^n) &= 
+					1+c+\ldots+c^{n-1}+c^n -(c+c^2+\ldots+c^n+c^{n+1})\\ &=
+					1-c^{n+1}
+					\intertext{i.e.}
+					\frac{1}{1-c}-(1+c+\ldots+c^{n-1}+c^n) &= \frac{c^{n+1}}{1-c}.
+				\end{align*}
+				The result follows, since $\dfrac{c^{n+1}}{1-c}\to 0$ as $n\to\infty$ if $|c|<1$
+			\end{proof}
+
+			\begin{thm}[Comparison Theorem]
+				Suppose that $|c_j|\le M_j,\:\forall j\in \mathbb{N}$. Then
+				\begin{align*}
+					\sum\limits_{j=0}^{\infty}M_j\text{ convergent }\Rightarrow
+					\sum\limits_{j=0}^{\infty}c_j\text{ convergent.}
+				\end{align*}
+			\end{thm}
+
+			The proof of the above theorem is rather straight forward if one is familiar with the Cauchy Convergence Criterion.\\
+
+			\begin{definition}[Cauchy Convergence Criterion]
+				\begin{align*}
+					\{a_n\}_{n=0}^{\infty}\text{ converges} \iff 
+					\{a_n\}_{n=0}^{\infty}\text{ is Cauchy.}\\
+					\varepsilon>0\Rightarrow \exists N\in \mathbb{N}: n,m\ge N \Rightarrow |a_n-a_m|<\varepsilon
+				\end{align*}
+			\end{definition}
+
+			\begin{definition}[Absolute Convergence]
+				The series
+				\begin{align*}
+					\sum\limits_{j=0}^{\infty}c_j
+				\end{align*}
+				is said to be absolutely convergent if
+				\begin{align*}
+					\sum\limits_{j=0}^{\infty}|c_j|
+				\end{align*}
+				is convergent. An absolutely convergent series is convergent by a trivial use of the comparison test.\\
+			\end{definition}
+
+			\begin{thm}[Ratio Test]
+				Suppose that the terms of the series
+				\begin{align*}
+					\sum\limits_{j=0}^{\infty}c_j
+				\end{align*}
+				have the following property: $\dfrac{|c_{j+1}|}{|c_j|}\to L$ as $j\to\infty$. Then the given series converge if $L<1$ and diverges if $L>1$.
+			\end{thm}
+
+			\begin{example}
+				Show that $\displaystyle\sum\limits_{j=0}^{\infty}\frac{4^j}{j!}$ converges.
+
+				Solution: Put $c_j = \frac{4^j}{j!}$. Then
+				\begin{align*}
+					\frac{|c_{j+1}|}{|c_j|} = \frac{4^{j+1}}{(j+1)!}\frac{j!}{4^j} = \frac{4}{j+1}\to 0\text{ as }j\to\infty.
+				\end{align*}
+				Convergence follows from the ratio test.\\
+			\end{example}
+
+			\begin{definition}[Pointwise Convergence]
+				Let $\{f_n\}_{n=0}^{\infty}$ be a sequence of functions defined on the set $E\subseteq \mathbb{C}$. Then we say that the sequence converges pointwise to $f$ on $E$ if for each $z\in E$ the sequence of numbers $\{f_n(z)\}_{n=0}^{\infty}$ converges to $f(z)$, i.e. for every $z|in E$ and for every $\varepsilon>0$:
+				\begin{align*}
+					\exists N\in \mathbb{N}: n\ge N \Rightarrow |f_n(z)-f(z)|<\varepsilon.
+				\end{align*}
+			\end{definition}
+
+			\begin{definition}[Uniform convergence]
+				Let $\{f_n\}_{n=0}^{\infty}$ be defined on $E\subseteq \mathbb{C}$. We say that the sequence converges uniformly to $f$ on $E$ if 
+				\begin{align*}
+					\forall \varepsilon>0\:\exists N\in \mathbb{N}: n\ge N\Rightarrow |f_n(z)-f(z)|<\varepsilon\:\forall z\in E
+				\end{align*}
+			\end{definition}
+
+			\begin{rem}
+				The above definition is equivalent to $\sup\limits_{z\in E}|f_n(z)-f(z)|\to 0$ is $n\to\infty$.
+			\end{rem}
+
+			Why care about uniform convergence? Because it preserves properties of functions under the limit operation.
+
+			\begin{thm}
+				Let $\{f_n\}_{n=0}^{\infty}$ be a sequence of continuous functions on e set $E\subseteq \mathbb{C}$, and suppose it converges uniformly to $f$ on $E$. Then $f$ is continuous on $E$.
+			\end{thm}
+
+			\begin{proof}
+				Take $z_0\in E$ and let $\varepsilon>0$ be given. We want to show that
+				\begin{align*}
+					z\in E,\:|z-z_0|< \delta\Rightarrow |f_n(z_0)-f(z)|<\varepsilon.
+				\end{align*}
+				First choose $N$ so large that $|f_n(z)-f(z)|<\varepsilon/3\:\forall z\in E$. This is possible since the sequence is uniformly convergent. Since $f_N$ is continuous at $z_0$, there exists $\delta$ s.th. $|f_N(z_0)-f_N(z)|<\varepsilon/3$ if $|z-z_0|<\delta$. For such $z$ is then holds that
+				\begin{align*}
+					|f(z_0)-f(z)| &= |f(z_0)-f_N(z_0)+f_N(z_0)-f_N(z)+f_N(z)-f(z_0)|\\ &\le
+					|f(z_0)-f_N(z_0)| + |f_N(z_0)-f_N(z)| + |f_N(z)-f(z)|\\ &\le
+					\frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3} = \varepsilon.
+				\end{align*}
+			\end{proof}
+		% subsection sequences_and_series_of_functions_uniform_convergence (end)
+	% section more_on_analytic_functions_and_notions_of_convergence (end)
+	\section{Power Series and Taylor Series} % (fold)
+	\label{sec:power_series_and_taylor_series}
+	
+	% section power_series_and_taylor_series (end)
 \end{document}
