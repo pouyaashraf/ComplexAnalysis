@@ -1697,9 +1697,9 @@
 			\begin{align*}
 				f(z_0) &= \frac{1}{2\pi i}\oint\limits_{C_R}\frac{f(z)}{z-z_0}dz.
 				\intertext{Parameterize $C_R: z(t)=z_0+Re^{it},\:t\in[0,2\pi]$.}
-				&= \frac{1}{2\pi i}\int\limits_{0}^{2\pi}\frac{f(z_0+Re^{it})}{Re^{it}}iRe^{it}dt = \frac{1}{2\pi i}\int\limits_{0}^{2\pi}f(z_0+Re^{it})dt.\tag*{(*)}
+				&= \frac{1}{2\pi i}\int\limits_{0}^{2\pi}\frac{f(z_0+Re^{it})}{Re^{it}}iRe^{it}dt = \frac{1}{2\pi i}\int\limits_{0}^{2\pi}f(z_0+Re^{it})dt.\tag*{$(*)$}
 			\end{align*}
-			(*) is called the 'mean value property'.\\
+			$(*)$ is called the 'mean value property'.\\
 
 			\begin{lemma}
 				Suppose $f$ is analytic in a disk centered at $z_0$, sat $D(z_0)$. Suppose also that
@@ -1722,6 +1722,7 @@
 				Which is a contradiction.
 			\end{proof}
 			\begin{thm}[The Maximum Modulus Principle]
+			\label{thm:maximum_modulus_principle}
 				If $f$ is analytic in a domain $D$ and $|f(z)|$ attains its maximum value at a point $z_0\in D$, then $f$ is constant in $D$.
 			\end{thm}
 
@@ -1971,6 +1972,611 @@
 	% section more_on_analytic_functions_and_notions_of_convergence (end)
 	\section{Power Series and Taylor Series} % (fold)
 	\label{sec:power_series_and_taylor_series}
-	
+		\begin{definition}[Power Series]
+			A series of the form
+			\begin{align*}
+				\sum\limits_{j=0}^{\infty}aj(z-z_o)^j
+			\end{align*}
+			is called a 'power series'. The constants $a_j$ are called the coefficients of the power series.\\
+		\end{definition}
+
+		\begin{thm}
+			For any power series, there is an $R\in[0,+\infty)$ (dependent on $a_j$) s.th
+			\begin{enumerate}[label=(\roman*)]
+				\item The series converges absolutely for $|z-z_0|<R$.
+				\item The series converges uniformly in any closed subdisk $|z-z_0\le r<R|$.
+				\item The series diverges for $|z-z_0|>R$.
+			\end{enumerate}
+			The number $R$ is called the 'radius of convergence' of the series.
+		\end{thm}
+
+		The proof depends on the following lemma:\\
+
+		\begin{lemma}
+			Suppose that
+			\begin{align*}
+				\sum\limits_{j=0}^{\infty}a_zw^j\tag*{$(*)$}
+			\end{align*}
+			converges at some points having modulus $r_0>0$. Then $(*)$ converges absolutely and uniformly in any subdisk $|w7\le r < r_0$.
+		\end{lemma}
+
+		\begin{proof}
+			Suppose that $(*)$ converges at some $w_0$ with $|w_0|=r_0$. This implies
+			\begin{align*}
+				|a_jw^j|\to 0\text{ as } j\to \infty \Rightarrow \exists M: |a_jw^j| = |a_j|r_0^j \le M\:\forall j.
+			\end{align*}
+			For any $|w|\le r$ it follows that
+			\begin{align*}
+				|a_jw^j| = |a_j|r_0^j\left(\frac{|w|}{r_0}\right)^j \le M\left(\frac{r}{r_0}\right)^j.
+			\end{align*}
+			Letting $M_j=M\left(\frac{r}{r_0}\right)^j$ the result follows by Weierstrass M-test.
+		\end{proof}
+
+		\begin{proof}[Proof (theorem)]
+			Let $w=z-z_0$. If the series $(*)$ converges only for $w=0$, or if it converges for all $w$ we are done (by Lemma above). Otherwise, let $r$ be the 'greatest' $r$ s.th. $(*)$ converges for some $w$ with $|w|=r$. More precisely, let $M=\{r>0:(*)\text{ converges for some }|w|=r\}$. then $M\not=\emptyset$ and upper-bounded. Let $R = \sup(M)$. For any $r<R$ there exists an $r<r_1\le R$ s.th. $r_1\le M$. By the lemma, $(*)$ converges absolutely and uniformly on $|w|\le r$.
+
+			If $|w|>R$, then $(*)$ diverges.
+		\end{proof}
+
+		\begin{example}
+			the geometric series 
+			\begin{align*}
+				\sum\limits_{j=0}^{\infty}z^j
+			\end{align*}
+			has radius of convergence 1. The series diverge if $|z|=1$.\\
+		\end{example}
+
+		\begin{example}
+			The power series 
+			\begin{align*}
+				\sum\limits_{j=0}^{\infty}\frac{z^j}{j^2}
+			\end{align*}
+			converges uniformly for $|z|<1$. This follows by Weierstrass M-test with $M_j=j^{-2}$. The series diverges if $|z|>1$.\\
+		\end{example}
+
+		\begin{thm}
+			Consider a power series
+			\begin{align*}
+				\sum\limits_{j=0}^{\infty}a_j(z-z_0)^j
+			\end{align*}
+			\begin{enumerate}[label=(\roman*)]
+				\item Ratio test: If the limit $\displaystyle L = \lim\limits_{j\to\infty} \frac{|a_{j+1}|}{|a_j|}$ exists, then $R=1/L$.
+				\item Root test: If the limit $\displaystyle L = \lim\limits_{j\to\infty} ^j\sqrt{|a_j|}$ exists, then $R=1/L$.\\
+			\end{enumerate}
+		\end{thm}
+
+		\begin{rem}~\\
+			\begin{enumerate}[label=(\roman*)]
+				\item In both cases, it is understood that $R=+\infty$ of $L=0$ and that $R=0$ if $L=+\infty$.
+				\item In fact, the following formula, due to Hadamard, is true for any power series:
+				\begin{align*}
+					R = \frac{1}{\lim\limits_{j\to\infty}\sup(^j\sqrt{|a_j|})}.
+				\end{align*}
+			\end{enumerate}
+		\end{rem}
+
+		\begin{proof}
+			Follows directly form the standard ratio/root test, e.g. let 
+			\begin{align*}
+				c_j(z) =
+				a_j(z-z_0)^j\Rightarrow \left|\frac{c_{j+1}(z)}{c_j(z)}\right| =
+				\left|\frac{a_{j+1}}{a_j}\right||z-z_0| \to L|z-z_0|,\:j\to\infty.
+			\end{align*}
+			By the ratio test, if $L|z-z_0|<1$, the series converges. If $L|z-z_0|>1$, the series diverges. So $R=1/L$. 
+		\end{proof}
+
+		\begin{example}
+			\begin{enumerate}[label=(\roman*)]
+				\item The series $\displaystyle\sum\limits_{j=0}^{\infty}\frac{z^j}{j!}$ has $R = +\infty$ since
+				\begin{align*}
+					a_j = \frac{1}{j!}\Rightarrow \frac{a_{j+1}}{a_j} = \frac{1}{j+1}\to 0\text{ as }j\to\infty.
+				\end{align*}
+				\item The series $\displaystyle\sum\limits_{j=0}^{\infty}j!z^j$ has $R = 0$ since
+				\begin{align*}
+					a_j = j!\Rightarrow \frac{a_{j+1}}{a_j} = {j+1}\to +\infty\text{ as }j\to\infty.
+				\end{align*}
+			\end{enumerate}
+		\end{example}
+
+		Since the partial sums of power series are analytic and converge uniformly in each closed subdisk of the disk of convergence, $\{|z-z_0|<R\}$, the convergence theorems from previous chapters immediately give the following theorem:\\
+
+		\begin{thm}
+			Suppose
+			\begin{align*}
+				\sum\limits_{k=0}^{\infty}a_k(z-z_0)^k
+			\end{align*}
+			has radius of convergence $R>0$. Then the function
+			\begin{align*}
+				f(z) = \sum\limits_{k=0}^{\infty}a_k(z-z_0)^k
+			\end{align*}
+			is analytic in the same disk. The derivatives of $f(z)$ can be obtained by termwise  differentiation of the series:
+			\begin{align*}
+				f'(z) &= \sum\limits_{k=0}^{\infty}ka_k(z-z_0)^{k-1}\\
+				f''(z) &= \sum\limits_{k=0}^{\infty}k(k-1)a_k(z-z_0)^{k-2}\\
+				&\:\:\vdots
+			\end{align*}
+			In particular, $\displaystyle a_k = \frac{f^{(n)}(z_0)}{k!}$.\\
+		\end{thm}
+
+		\begin{example}
+			We have that, for $|z|<1$
+			\begin{align*}
+				\frac{1}{1-z} = 
+				\sum\limits_{j=0}^{\infty}z^j
+				\Rightarrow \frac{1}{(1-z)^2} = \sum\limits_{j=0}^{\infty}jz^{j-1}
+			\end{align*}
+			by termwise differentiation. One can also integrate termwise:
+			\begin{align*}
+				\int\limits_{0}^{w}\frac{1}{1-z}dz &=
+				\sum\limits_{k=0}^{\infty}\int\limits_{0}^{w}z^k dz =
+				\sum\limits_{k=0}^{\infty}\left[\frac{z^{k+1}}{k+1}\right]_0^w =
+				\sum\limits_{k=0}^{\infty}\frac{w^{k+1}}{k+1} =
+				\sum\limits_{n=1}^{\infty}\frac{w^{n}}{n}.
+			\end{align*}
+			But $\displaystyle\int\limits_{0}^{w}\frac{1}{1-z}dz = [- \mathrm{Log}(1-z)]_0^w = - \mathrm{Log}(1-w)$ for $|w|<1$. This all implies
+			\begin{align*}
+				\mathrm{Log}(1-w) = -\sum\limits_{n=1}^{\infty}\frac{w^{n}}{n},\:|w|<1\\
+				\Rightarrow \mathrm{Log}(1+z) = \sum\limits_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}z^n,\:|z|<1.
+			\end{align*}
+		\end{example}
+
+		\begin{example}
+			Let $\displaystyle f(z) = \sum\limits_{n=0}^{\infty}\frac{z^n}{n!}$. Since $R=+\infty$, this is an entire function.
+			\begin{align*}
+				f'(z) &= \sum\limits_{n=1}^{\infty}\frac{z^{n-1}}{(n-1)!} = 
+				f(z),\text{ also } f(0)=1.\\
+				\Rightarrow \frac{d}{dz}\left(f(z)e^{-z}\right) &= 
+				f'(z)e^{-z}-f(z)e^{-z} = 0\\
+				\Rightarrow f(z)e^{-z} &= c\in \mathbb{C}.\quad z=0\Rightarrow c=0\\
+				\Rightarrow e^z &= \sum\limits_{n=0}^{\infty}\frac{z^n}{n!}
+			\end{align*}
+		\end{example}
+
+		\begin{thm}[Taylor's Theorem]
+		\label{thm:taylors_theorem}
+			Suppose that $f(z)$ is analytic in some disk $|z-z_0<r|$. Then
+			\begin{align*}
+				f(z)= \sum\limits_{k=0}^{\infty}\frac{f^{(n)}(z_0)}{k!}(z-z_0)^k,\:|z-z_0|<R.
+			\end{align*}
+		\end{thm}
+
+		\begin{proof}[Proof Sketch]
+			Let $r<R$ and fix $z$ s.th. $|z-z_0|<r$. By Cauchy's Integral Formula
+			\begin{align*}
+				f(z) &= \frac{1}{2\pi i}\oint\limits_{C_r}\frac{f(\zeta)}{(\zeta-z)}d \zeta.
+				\intertext{Now}
+				\frac{f(\zeta)}{(\zeta-z)} &= 
+				\frac{f(\zeta)}{(\zeta-z_0)}\frac{1}{1- \frac{z-z_0}{\zeta-z_0}} =
+				\frac{f(\zeta)}{(\zeta-z_0)}\sum\limits_{k=0}^{\infty}\left(\frac{z-z_0}{\zeta-z_0}\right)^k \\ &=
+				\sum\limits_{k=0}^{\infty}\frac{f(\zeta)(z-z_0)^k}{(\zeta-z_0)^{k+1}}
+			\end{align*}
+			where the convergence is uniform w.r.t. $\zeta\in C_r$. All in all, this implies
+			\begin{align*}
+				f(z) &=
+				\sum\limits_{k=0}^{\infty}\frac{1}{2\pi i}\oint\limits_{C_r}\frac{f(\zeta)(z-z_0)^k}{(\zeta-z_0)^{k+1}}d \zeta =
+				\sum\limits_{k=0}^{\infty}\left(\frac{1}{2\pi i}\oint\limits_{C_r}\frac{f(\zeta)}{(\zeta-z_0)^{k+1}}d \zeta\right)\cdot(z-z_0)^k\\ &=
+				\sum\limits_{k=0}^{\infty}\frac{f^{(k)}(z_0)}{k!}(z-z_0)^k
+			\end{align*}
+		\end{proof}
 	% section power_series_and_taylor_series (end)
+	\section{Laurent Series, Zeros and Singularities} % (fold)
+	\label{sec:laurent_series_zeros_and_singularities}
+		\begin{thm}[Laurent's Theorem]
+		\label{thm:laurents_theorem}
+			Suppose that $f$ is analytic in $r<|z-z_0|<R$. then $f$ can be expressed as the sum of two series
+			\begin{align}
+			\label{thm:laurent_series}
+				f(z)=
+				\sum\limits_{j=0}^{\infty}a_j(z-z_0)^j + 
+				\sum\limits_{j=1}^{\infty}a_{-j}(z-z_0)
+				^{-j}.
+			\end{align}
+			Where both series converge absolutely in $r<|z-z_0|<R$, and they both converge uniformly in any sub-annulus
+			\begin{align*}
+				r- \rho_1<|z-z_0|< \rho_2<R.
+			\end{align*}
+			The coefficients $a_j$ are given by
+			\begin{align}
+			\label{thm:laurent_a_j}
+				a_j = \frac{1}{2\pi i}\int\limits_{C}\frac{f(\zeta)}{(\zeta-z_0)^{j+1}}d \zeta,\quad j\in \mathbb{Z}
+			\end{align}
+			where $C$ is any positively oriented circle $|z-z_0|= \rho$, with $r< \rho< R$. Any pointwise convergent expansion of $f$ in $r<|z-z_0|<R$ of the form (\ref{thm:laurent_series}) agrees with that above, i.e. the coefficients $a_j$ agree with (\ref{thm:laurent_a_j}), and therefore the expansion is unique.\\
+		\end{thm}
+
+		\begin{rem}
+			\begin{enumerate}
+				\item We allow that $r=0$ and $R=+\infty$.
+				\item The above expansion of $f$ is called the 'Laurent Series' of $f$ in $r<|z-z_0|<R$. It is often written shortly
+				\begin{align*}
+					f(x) = \sum\limits_{j=-\infty}^{\infty}a_j(a-a_0)^j
+				\end{align*}
+				\item If $f$ is analytic in $|z-z_0|<R$, then $a_j=0$ for $j<0$ by Cauchy's Integral Theorem, and the other terms reproduce the Taylor series of $f$ (According to Cauchy's Generalized Integral Formula).\\
+			\end{enumerate}
+		\end{rem}
+
+		\begin{proof}[Proof Sketch]
+			\begin{multicols}{2}
+				We start by proving existence. Fix 
+				$z\in\{\rho_1\le|z-z_0|\le \rho_2\} = A_{\rho_1,\rho_2}$. Let $C_1,\:C_2$ be two positively oriented circles of radii $\tilde{\rho_1},\:\tilde{\rho_2}$ (dashed in figure), where $\tilde{\rho_1}< \rho_1<\rho_2<\tilde{\rho_2}$.
+
+				By Cauchy's Integral Formula, we have
+				\begin{align}
+				\label{eq:laurent_proof}
+					f(z) &=
+					\frac{1}{2\pi i}\int\limits_{C_2}\frac{f(\zeta)}{(\zeta-z)}d \zeta \\ &-
+					\frac{1}{2\pi i}\int\limits_{C_1}\frac{f(\zeta)}{(\zeta-z)}d \zeta\nonumber
+				\end{align}
+				\begin{figure}[H]
+				\centering
+					\begin{tikzpicture}[scale = 1.3, transform shape]
+						\begin{axis}
+							[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -1.51, ymax = 1.51,
+								xmin = -1.51, xmax = 1.51,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+							]
+
+								\addplot[thick, dashed, samples=100, domain=0:2*pi]
+									({0.2*cos(deg(x))},{0.2*sin(deg(x))});
+
+								\addplot[thick, samples=100, domain=0:2*pi]
+									({0.5*cos(deg(x))},{0.5*sin(deg(x))}) node at (axis cs:0.4,0.4) {$\rho_1$};
+
+								\addplot[thick, dotted, samples=100, domain=0:2*pi]
+									({0.8*cos(deg(x))},{0.8*sin(deg(x))});
+
+								\addplot[thick, samples=100, domain=0:2*pi]
+									({1.2*cos(deg(x))},{1.2*sin(deg(x))}) node at (axis cs:0.9,0.9) {$\rho_2$};
+
+								\addplot[thick, dashed, samples=100, domain=0:2*pi]
+									({1.5*cos(deg(x))},{1.5*sin(deg(x))});
+						\end{axis}
+					\end{tikzpicture}
+				\end{figure}
+			\end{multicols}
+			As in the proof of Taylor's Theorem, for $\zeta\in C_2$:
+			\begin{align*}
+				\frac{f(\zeta)}{\zeta-z} = 
+				\frac{f(\zeta)}{\zeta-z_0}\frac{1}{1- \frac{z-z_0}{\zeta-z_0}} = 
+				\frac{f(\zeta)}{(\zeta-z_0)}\sum\limits_{j=0}^{\infty}\left(\frac{z-z_0}{\zeta-z_0}\right)^j =
+				\sum\limits_{j=0}^{\infty}\frac{f(\zeta)}{(\zeta-z_0)^{j+1}}(z-z_0)^j
+			\end{align*}
+			with uniform convergence in the variable $\zeta\in C_2$.
+			\begin{align*}
+				\Rightarrow \frac{1}{2\pi i }\int\limits_{C_2}\frac{f(\zeta)}{(\zeta-z)}d \zeta &= 
+				\sum\limits_{j=0}^{\infty}\left[\frac{1}{2\pi i}\int\limits_{C_2}\frac{f(\zeta)}{(\zeta-z_0)^{j+1}}d \zeta\right](z-z_0)^j =
+				\sum\limits_{j=0}^{\infty}\left[\frac{1}{2\pi i}\int\limits_{C_2}d \zeta\right](z-z_0)^j\\ &=
+				\sum\limits_{j=0}^{\infty}a_j(z-z_0)^j,
+			\end{align*}
+			with $a_j$ as in (\ref{thm:laurent_a_j}).
+
+			In fact, the series converges pointwise got any $C$ inside $C_2$, hence it does converge absolutely and uniformly on any smaller disk (and so on $A_{\rho_1,\rho_2}$, since $\tilde{\rho_2}$ is arbitrarily smaller than $R$, the first term in (\ref{eq:laurent_proof}) is analytic on $|z-z_0|<R$).
+
+			Similarly for $\zeta\in C_1$:
+			\begin{align*}
+				- \frac{f(\zeta)}{\zeta-z} =
+				\frac{f(\zeta)}{z-z_0}\frac{1}{1- \frac{\zeta-z_0}{z-z_0}} = 
+				\frac{f(\zeta)}{z-z_0}\sum\limits_{j=0}^{\infty}\left(\frac{\zeta-z_0}{z-z_0}\right)^j = 
+				\sum\limits_{j=1}^{\infty}\frac{f(\zeta)}{(\zeta-z_0)^{j+1}}(z-z_0)^{-j}
+			\end{align*}
+			with uniform convergence w.r.t. $\zeta\in C_1$.
+			\begin{align*}
+				\Rightarrow -\frac{1}{2\pi i}\int\limits_{C_1}\frac{f(\zeta)}{\zeta - z}d \zeta &=
+				\sum\limits_{j=1}^{\infty}\left[\frac{1}{2\pi i}\int\limits_{C_1}\frac{f(\zeta)}{(\zeta-z_0)^{-j+1}}d \zeta\right](z-z_0)^{-j} =
+				\sum\limits_{j=1}^{\infty}\left[\frac{1}{2\pi i}\int\limits_{C_1}d \zeta\right](z-z_0)^{-j}\\ &=
+				\sum\limits_{j=0}^{\infty}a_{-j}(z-z_0)^{-j}.
+			\end{align*}
+			The latter series in fact converges pointwise for any $t$ outside $C_1$. An argument similar to that in the power series lemma shoes that the series converges absolutely and uniformly outside any circle strictly larger than $C_1$, and so on this annulus $A_{\rho_1,\rho_2}$ (since in fact $\tilde{\rho_1}$ was arbitrarily chosen, the second term in (\ref{eq:laurent_proof})) is analytic on $|z-z_0|>r$.
+
+			This proves the existence. Suppose now that we have an expansion of $f$ 
+			\begin{align*}
+				f(z) = \sum\limits_{j=0}^{\infty}a_j(z-z_0)^j
+			\end{align*}
+			which converges pointwise in the given annulus. Then convergence is uniform on $C$, so
+			\begin{align*}
+				\int\limits_{C}\frac{f(\zeta)}{(\zeta-z)^{k+1}}d \zeta &=
+				\sum\limits_{j=0}^{\infty}a_j\int\limits_{C}(z-z_0)^{j-k-1} dz
+				\intertext{the integral evaluates to $2\pi i$ if $j=k$ and 0 otherwise, so:} &=
+				2\pi i a_k.
+			\end{align*}
+			the coefficients are uniquely defined by $f$ and given by (\ref{thm:laurent_a_j}).
+		\end{proof}
+
+		\begin{example}
+			Determine the Laurent series for
+			\begin{align*}
+				f(z) = \frac{z^2-2z+3}{z-2},\quad |z-1|>1.
+			\end{align*}
+
+			Solution:
+			\begin{enumerate}
+				\item $f$ is analytic in $\mathbb{C}\setminus\{2\}$
+				\item $z_0=1,\:r=1,\:R=+\infty$.
+			\end{enumerate}
+			\begin{align*}
+				\frac{1}{z-2} = 
+				\frac{1}{z-1-1} = 
+				\frac{1}{1- \frac{1}{z-1}} = 
+				\frac{1}{z-1}\sum\limits_{j=0}^{\infty}(z-z_0)^{-j} = 
+				\sum\limits_{j=1}^{\infty}\frac{1}{(z-1)^j}.
+			\end{align*}
+			Now
+			\begin{align*}
+				z^2-2z+3 = 
+				(z-1)^2 +2 \Rightarrow \frac{z^2-2z+3}{z-2} &= 
+				[z^2-2z+3]\left(\frac{1}{z-1} + \frac{1}{(z-1)^2}+\ldots\right)\\ &=
+				(z-1)+1 +\sum\limits_{j=1}^{\infty}\frac{3}{(z-1)^j},\quad |z-1|>1.
+			\end{align*}
+		\end{example}
+
+		\begin{example}
+			Determine the Laurent Series for $e^{\frac{1}{z}}$, around $z=0$.
+
+			Solution: We know that 
+			\begin{align*}
+				e^w = \sum\limits_{j=0}^{\infty}\frac{w^j}{j!} \Rightarrow
+				e^{\frac{1}{z}} = \sum\limits_{j=0}^{\infty}\frac{1}{j!z^j},\quad z\in \mathbb{C}\setminus\{0\}.
+			\end{align*}
+		\end{example}
+		\subsection{Zeros and Singularities} % (fold)
+		\label{sub:zeros_and_singularities}
+			\begin{definition}
+				Suppose that $f$ is analytic at $z_0$. Then $z_0$ is called a zero of order $m$ for out function $f$ if the following holds:
+				\begin{align*}
+					f^{(j)}(z_0) &= 0,\:j = 0,1,\ldots,\: m-2,\:m-1,\quad
+					f^{(m)}(z_0) \not=0
+				\end{align*}
+				A zero of order 1 is called a simple zero.\\
+			\end{definition}
+
+			\begin{thm}
+			\label{thm:zero_of_order_m}
+				Suppose $f$ is analytic at $z_0$. Then $f$ has a zero of order $m$ at $z_0$ iff. it can be written as follows:
+				\begin{align*}
+					f(z) &= (z-z_0)^m g(z),
+					\intertext{where $g$ is analytic at $z_0$ and}
+					g(z_0) &\not=0.
+				\end{align*}
+			\end{thm}
+
+			\begin{proof}[Proof Sketch]
+				By Taylor's Theorem (Theorem~\ref{thm:taylors_theorem}),
+				\begin{align*}
+					f(z) &= a_m(z-z_0)^m + a_{m+1}(z-z_0)^{m+1}+\ldots \\ &=
+					(z-z_0)^m[a_m+a_{m+1}(z-z_0)+\ldots]\\\\
+					a_m &= \frac{f^{(m)}(z_0)}{m!}\not = 0.
+				\end{align*}
+				Let $g(z)=[a_m+a_{m+1}(z-z_0)+\ldots]$ which is analytic near $z_0$ and $g(z_0)=a_m\not=0$. Taylor expanding $g$ we find that $f$ has power series representation
+				\begin{align*}
+					f(z) = g(z_0)(z-z_0)^m + g'(z_0)(z-z_0)^{m-1}+\ldots
+					\intertext{The coefficients are $\dfrac{f^{(j)}(z_0)}{m!}$, hence}
+					\frac{f^{(j)}(z_0)}{j!} &= 0,\quad j=0,1,\ldots,m-1\\
+					\frac{f^{(m)}(z_0)}{m!} &= g(z_0) \not=0.
+				\end{align*}
+			\end{proof}
+		% subsection zeros_and_singularities (end)
+	% section laurent_series_zeros_and_singularities (end)
+	\section{Zeros and Singularities} % (fold)
+	\label{sec:zeros_and_singularities}
+		Recall that if $f$ is analytic at $z_0$, we call $z_0$ a zero of order $m$ for $f$ if
+		\begin{align*}
+			f^{(j)}(z_0) &= 0,\:j = 0,1,\ldots,\: m-2,\:m-1,\quad
+			f^{(m)}(z_0) \not=0.
+		\end{align*} 
+		We also proved Theorem~\ref{thm:zero_of_order_m}.\\
+
+		\begin{cor}
+			Suppose $f$ is analytic at $z_0$ and that $f(z_0)=0$. Then, either $f$ is identically zero in a neighbourhood of $z_0$, or there is a punctured disk about $z_0$ in which $f$ is non-vanishing.
+		\end{cor}
+
+		\begin{proof}
+			Let $\sum\limits_{j=0}^{\infty}a_j(z-z_0)^j$ be the Taylor expansion of $f$ about $z_0$. If $a_j=0\:\forall j>0$, then $f$ must be identically zero in a neighbourhood if $z_0$. Otherwise, let $m=\min\{j:a_j\not=0\}$. Clearly then, $f$ has a zero of order $m$ at $z_0$, so $f(z)?(z-z_0)^mg(z)$ where $g$ is analytic at $z_0$, and $g(z_0)\not=0$. Then $g$ is continuous at $z_0$ and $g(z_0)\not=0$, so there is a disk of radius $\delta$ in which $g(z_0)\not=0$. Then $f(z)\not=0$ in $0<|z-z_0|<\delta$.
+		\end{proof}
+
+		If $f$ is analytic in some domain $D$ and vanishes identically in some disk in $D$, it in fact vanishes identically in all of $D$. This can be proven by an argument similar to that in the proof of the Maximum Modulus Principle (Theorem~\ref{thm:maximum_modulus_principle}).
+
+		We therefore have:\\
+
+		\begin{thm}[The Uniqueness Principle]
+		\label{thm:uniqueness_principle}
+			If $f$ and $g$ are analytic on a domain $D$ and if they agree $(f=g)$ for $z$ belonging to a set that has a non-isolated point, then $f=g$ on all of $D$.\\
+		\end{thm}
+
+		\begin{definition}
+			A point $z_0$ is called an isolated singularity of $f$ if $f$ is analytic in some punctured disk $0<|z-z_0|<R$ about $z_0$, but not analytic at $z_0$.\\
+		\end{definition}
+
+		Let $z_0$ be an isolated singularity of $f$. Then $f$ has a Laurent series expansion
+		\begin{align*}
+			f(z) =\sum\limits_{j=-\infty}^{\infty}a_j(z-z_0)^j,\quad 0<|z-z_0|<R\tag*{$(*)$}
+		\end{align*}
+
+		\begin{definition}
+			Let $z_0$ be an isolated singularity of $f$, and let $(*)$ be its Laurent series expansion on $0<|z-z_0|<R$.
+			\begin{enumerate}[label=(\roman*)]
+				\item If $a_j=0\:\forall j<0$, we say that $z_0$ is a removable singularity of $f$.
+				\item If $a_{-m}\not=0$ for some positive integer $m$, but $a_j=0$ for all $j<-m$, we say that $z_0$ is a pole of order $m$ for $f$.
+				\item If $a_j\not=0$ for infinitely many $j<0$, we say that $z_0$ is an essential singularity of $f$.
+			\end{enumerate}
+		\end{definition}
+
+		If $f$ has a removable singularity at $z_0$, then its Laurent series takes the following form:
+		\begin{align*}
+			f(z)=\sum\limits_{j=0}^{\infty}a_j(z-z_0)^j,\quad 0<|z-z_0|<R.
+		\end{align*}
+		By putting $f(z_0)=a_0$, $f$ becomes analytic in $|z-z_0|<R$, and hence bounded in a neighbourhood of $z_0$.
+
+		Conversely, we have Riemann's theorem on removable singularities\\
+
+		\begin{thm}[Riemann's Theorem of Removable Singularities]
+			Let $z_0$ be an isolated singularity of $f$. If $f$ is bounded in a punctured neighbourhood of $z_0$, then $f$ has a removable singularity at $z_0$.
+		\end{thm}
+
+		\begin{proof}
+			From Laurent's theorem (Theorem~\ref{thm:laurents_theorem}),
+			\begin{align*}
+				a_j = \frac{1}{2\pi i}\oint\limits_{|z-z_0|=\rho}\frac{f(\zeta)}{(\zeta-z)^{j+1}}d \zeta \quad 0< \rho < R.
+			\end{align*}
+			So if $|f(\zeta)|\le M$ for $|\zeta-z_0|=\rho$, then $a_j\le \frac{1}{2\pi}\frac{M}{\rho^{j+1}}\cdot 2\pi \rho = \frac{M}{\rho^j}$ by the ML-Inequality. So if $j<0$, letting $\rho\to 0$, we see tat $a_j=0$.
+		\end{proof}
+
+		If $f$ has a pole of order $m$ at $z_0$, the Laurent series $(*)$ takes the following form:
+		\begin{align*}
+			f(z) = \frac{a_{-m}}{(z-z_0)^m}+ \frac{a_{-(m-1)}}{(z-z_0)^{m-1}} + \ldots + \frac{a_{-1}}{(z-z_0)} + a_0 + a_1(z-z_0) + \ldots,\quad a_{-m}\not =0.
+		\end{align*}
+
+		One easily obtains the following:\\
+
+		\begin{thm}
+			Let $z_0$ be an isolated singularity of $f$. Then $z_0$ is a pole of order $m$ iff. $f$ in a punctured neighbourhood of $z_0$ can be represented as follows:
+			\begin{align*}
+				f(z) = \frac{g(z)}{(z-z_0)^m}
+			\end{align*}
+			where $g$ is analytic and $g(z_0)\not=0$.
+		\end{thm}
+
+		\begin{proof}
+			$\Rightarrow$ Let $g(z) =  a_{-m}+a_{-(m-1)}(z-z_0)+\ldots$
+
+			$\Leftarrow$ Taylor expand $g$ near $z_0$.
+		\end{proof}
+
+		By the above characterization of zeros and poles of order $m$, we easily prove the following result (exercise!)\\
+
+		\begin{thm}
+			If $f$ has a zero of order $m$ at $z_0$, then $\frac{1}{f}$ has a pole of order $m$ at $z_0$. Conversely, if $f$ has a pole of order $m$ at $z_0$, then $\frac{1}{f}$ has a removable singularity at $z_0$, and if we define $\frac{1}{f(z_0)}$ to be 0, then $\frac{1}{f}$ is analytic at $z_0$ and has a zero of order $m$ at $z_0$.\\
+		\end{thm}
+
+		\begin{thm}
+			Let $z_0$ be an isolated singularity of $f$. Then $z_0$ is a pole of $f$ iff. $|f(z)|\to +\infty$ as $z\to z_0$.
+		\end{thm}
+
+		\begin{proof}
+			If $z_0$ is a pole of order $m$, then form $f= \frac{g}{(z-z_0)^m}$ with $g$ analytic at $z_0$, $g(z_0)\not = 0$. Clearly, $|f(z)| = |z-z_0|^{-m}|g(z)|\to+\infty$. Conversely, if $|f(z)\to +\infty|$, $z\to z_0$. Clearly $f(z)\not=0$ in a punctured disk about $z_0$, i.e. $h(z) = \frac{1}{f(z)}$ is analytic in a punctured disk about $z_0$. Further, $h(z)\to 0$ as $z\to z_0$. So by Riemann's theorem above, $h$ has a removable singularity at $z_0$. So $h$ extends to an analytic function near $z_0$ with $h(z_0)=0$ if $m$ denotes the finite order of the zero of $h$ at $z_0$ and we are done.
+		\end{proof}
+
+		\begin{definition}
+			A function $f$ is said to be meromorphic in a domain $D$ if at every point of $D$, $f$ is either analytic or a pole.\\
+		\end{definition}
+
+		\begin{thm}[Picard]
+		\label{thm:picard}
+			A function with and essential singularity assumes every complex number, with one possible exception, as a value in any neighbourhood of this singularity.
+		\end{thm}
+
+		\begin{proof}
+			See book.
+		\end{proof}
+
+		\subsection{The Residue Theorem} % (fold)
+		\label{sub:the_residue_theorem}
+			Let $\Gamma$ be a simple closed positively oriented contour in $\mathbb{C}$. Suppose $f$ is analytic inside and on $\Gamma$ except for a finite number of isolated singularities $z_1,z_2,\ldots,z_n$ inside $\Gamma$. Then
+			\begin{align*}
+				\oint\limits_{\Gamma} f(z)dz = \sum\limits_{j=1}^{n}\int\limits_{C_j}f(z)dz.
+			\end{align*}
+			in a punctured neighbourhood $z_j$, $f$ has a Laurent series 
+			\begin{align*}
+				f(z)=\sum\limits_{n=-\infty}^{\infty}a_n(z-z_0)^j.
+			\end{align*}
+			According to Laurent's theorem, $\displaystyle a_{-1} = \frac{1}{2\pi i}\int\limits_{C_j}f(z)dz$.\\
+
+			\begin{definition}
+				If $f$ has an isolated singularity at $z_0$, then the coefficient $a_{-1}$ in the Laurent series expansion for $f$ around $z_0$ is called the 'residue' of $f$ at $z_0$ and is denoted $\mathrm{Res}(f,z_0)$.\\
+			\end{definition}
+
+			\begin{thm}[Residue Theorem]
+			\label{thm:residue_thm}
+				Let $\Gamma$ be a simple closed positively oriented contour, and let $f$ be analytic inside and on $\Gamma$, except at finitely many isolated singularities $z_1,z_2,\ldots,z_n\in \Gamma$. Then
+				\begin{align*}
+					\int\limits_{\Gamma}f(z)dz = 2\pi i\sum\limits_{j=1}^{n}\mathrm{Res}(f,z_j).
+				\end{align*}
+			\end{thm}
+		% subsection the_residue_theorem (end)
+	% section zeros_and_singularities (end)
+	\section{Integral Calculations Using Residue Calculus} % (fold)
+	\label{sec:integral_calculations_using_residue_calculus}
+		Recall The Residue Theorem (Theorem~\ref{thm:residue_thm}).\\
+
+		\begin{example}
+			Compute
+			\begin{align*}
+				\oint\limits_{|z|=4}ze^{\frac{3}{z}}dz.
+			\end{align*}
+
+			Solution:
+			\begin{align*}
+				e^w &= \sum\limits_{j=0}^{\infty}\frac{w^j}{j!},\:w\in \mathbb{C}\quad\Rightarrow\quad
+				e^{\frac{3}{z}} = \sum\limits_{j=0}^{\infty}\left(\frac{3}{z}\right)^j,\:z\not=0.\\\\
+				\Rightarrow ze^{\frac{3}{z}} &= z\left(1+\frac{3}{z}+\frac{3^2}{2z^2}+\ldots\right) = z+3+\frac{9}{2z}+\ldots,\quad z\not=0\\
+				\Rightarrow \mathrm{Res}(ze^{\frac{3}{z}},0) &= \frac{9}{2} \Rightarrow \oint\limits_{|z|=4}ze^{\frac{3}{z}}dz = 2\pi i \frac{9}{2} = 9\pi i.
+			\end{align*}
+		\end{example}
+
+		\subsection{The Residue Calculus} % (fold)
+		\label{sub:the_residue_calculus}
+			\begin{enumerate}
+				\item If $f$ has a removable singularity at $z_0$, $\mathrm{Res}(f,z_0) = 0$.
+				\item Suppose that $f$ has a \underline{simple pole}, i.e. a pole of order one at $z_0$. then $f$ has a Laurent series expansion 
+				\begin{align*}
+					f(z) = \frac{a_{-1}}{(z-z_0)} + a_0 + a_1(z-z_0)+\ldots
+				\end{align*}
+				in a punctured neighbourhood about $z_0$. Hence
+				\begin{align*}
+					\mathrm{Res}(f,z_0) = \lim\limits_{z\to z_0}(z-z_0)f(z)
+				\end{align*}
+			\end{enumerate}
+
+			\begin{example}
+				$\displaystyle f(z)=\frac{e^z}{z(z+1)}$ has simple poles at $z=0,\:1$.
+				\begin{align*}
+					\mathrm{Res}(f,0) &= \lim\limits_{z\to 0} \frac{e^z}{z+1} = 1\\
+					\mathrm{Res}(f,1) &= \lim\limits_{z\to -1} \frac{e^2}{z} = - \frac{1}{e}
+				\end{align*}
+			\end{example}
+
+			\begin{example}
+				Suppose $f(z) = \frac{g(z)}{h(z)}$ where $g,h$ are analytic at $z_0$ and suppose that $h$ has a simple zero at $z_0$, while $g$ is non-zero at that point. Clearly, $f$ has a simple pole at $z_0$, and 
+				\begin{align*}
+					\mathrm{Res}(f,z_0) = \lim\limits_{z\to z_0}(z-z_0)\frac{g(z)}{h(z)} = \lim\limits_{z\to z_0}\frac{g(z)}{\frac{h(z)-h(z_0)}{(z-z_0)}} = \frac{g(z)}{h'(z)}.
+				\end{align*}
+				Thus, in such a case, we have $\mathrm{Res}(f,z_0)=\frac{g(z_0)}{h'(z_0)}$.
+			\end{example}
+			\begin{enumerate}
+				\item[3.] Suppose $f$ has a pole of order $m$ at $z_0$. Then $f$ has Lauren series expansion
+				\begin{align*}
+					f(z) = \frac{a_{-m}}{(z-z_0)^m}+\frac{a_{-(m-1)}}{(z-z_0)^{m-1}}+\ldots+a_0+a_1(z-z_0)+\ldots
+				\end{align*}
+				in a punctured neighbourhood about $z_0$. It follows that
+				\begin{align*}
+				 	 (z-z_0)^mf(z) &= a_{-m} + a_{-(m-1)}(z-z_0) + \ldots + a_{-1}(z-z_0)^{m-1} + a_0(z-z_0)^m +\ldots
+				 	 \intertext{and so}
+				 	 \frac{d^{m-1}}{dz^{m-1}}\left[(z-z_0)^mf(z)\right] &= (m-1)!a_{-1}(z-z_0)^m + m!a_0(z-z_0)^m +\ldots
+				\end{align*}
+				Taking the limit as $z\to z_0$ we get:\\
+			\end{enumerate}
+
+			\begin{thm}
+				If $f$ has a pole of order $m$ at $z_0$, then
+				\begin{align*}
+					\mathrm{Res}(f,z_0) = \lim\limits_{z\to z_0}\frac{1}{m!}\frac{d^{m-1}}{dz^{m-1}}\left[(z-z_0=^mf(z)\right].
+				\end{align*}
+			\end{thm}
+		% subsection the_residue_calculus (end)
+		\subsection{Calculations of Integrals} % (fold)
+		\label{sub:calculations_of_integrals}
+			Trigonometric integrals can sometimes be integrated using residues calculus\\
+
+			\begin{example}
+				
+			\end{example}
+		% subsection calculations_of_integrals (end)
+	% section integral_calculations_using_residue_calculus (end)
 \end{document}
