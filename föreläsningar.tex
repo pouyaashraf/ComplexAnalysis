@@ -116,7 +116,7 @@
 			\end{minipage}
 			\begin{minipage}{0.45\textwidth}
 				\begin{figure}[H]
-				 	\flushright
+				 	\centering
 				 	\begin{tikzpicture}[scale=0.9, transform shape]
 				 		\begin{axis}
 				 			[
@@ -328,17 +328,17 @@
 			Given a complex number $z\in \mathbb{C}$, consider the equation $w^n=z$ (*). The set of all solutions $w$ of (*) is denoted by $x^{\frac{1}{n}}$, and is called the $n$\textsuperscript{th} root of $z$. If $z=0$, then $w=0$. Suppose $z\not=0$ and write $w=|w|e^{i \alpha},\:z=|z|e^{i\theta}$ with help from de Moivres formula. We then have that $|w|^ne^{in \alpha} = |z|e^{i\theta}$, and clearly
 			\begin{align*}
 				\begin{cases}
-					|w| = ^n\sqrt{|z|}\\
+					|w| = \sqrt[n]{|z|}\\
 					n\alpha = \theta + 2k\pi,\:k\in \mathbb{Z}
 				\end{cases}\iff
 				\begin{cases}
-					|w| = ^n\sqrt{|z|}\\
+					|w| = \sqrt[n]{|z|}\\
 					\alpha = \frac{\theta}{n} + \frac{2k\pi}{n}.
 				\end{cases}
 			\end{align*}
 			Every $k\in \mathbb{Z}$ gives a solution of (*), but only $k\in\{0,1,\ldots,n-1\}$ solutions are unique; namely:
 			\begin{align*}
-				z^{\frac{1}{n}} = ^n\sqrt{|z|}e^{i(\frac{\theta}{n}+k \frac{2\pi}{n})},\: k\in\{0,1,\ldots,n-1\}.
+				z^{\frac{1}{n}} = \sqrt[n]{|z|}e^{i(\frac{\theta}{n}+k \frac{2\pi}{n})},\: k\in\{0,1,\ldots,n-1\}.
 			\end{align*}
 			Suppose again that $z\not=0$. For $n\in \mathbb{Z}$, it holds that $z^n=e^{n\log(z)}$ for every value of $\log(z)$. It is also true that $z^{\frac{1}{n}} = e^{\frac{1}{n}\log(z)}$, i.e. the right-hand-side
 			\begin{align*}
@@ -845,7 +845,7 @@
 							\frac{\alpha\left(\dfrac{az+b}{cz+d}\right)+\beta}{\gamma\left(\dfrac{az+b}{cz+d}\right) + \delta}\\ &=
 							\frac{(\alpha a + \beta c)z + (ab+\beta d)}{(\gamma a + \delta c)z + (\gamma b + \delta d)}
 						\end{align*}
-						so the composition of Möbius transformations is are Möbius transformations (so they form a group under the operation of composition). Note the following:
+						so the composition of Möbius transformations are Möbius transformations (so they form a group under the operation of composition). Note the following:
 						\begin{align*}
 							\begin{pmatrix}
 								\alpha & \beta\\
@@ -860,7 +860,7 @@
 								\gamma a + \delta c & \gamma b + \delta d
 							\end{pmatrix}
 						\end{align*}
-						Meaning that the composing transformations is 'the same' as multiplying matrices containing the coefficients of the transformations (by 'the same', we mean that there is an isomorphy between these two).
+						Meaning that the composing transformations is 'the same' as multiplying matrices containing the coefficients of the transformations (by 'the same', we mean that there is an isomorphism between these two).
 
 						The inverse, $T^{-1}:\hat{\mathbb{C}}\to \hat{\mathbb{C}}$, is given by solving the following:
 						\begin{align*}
@@ -1464,7 +1464,7 @@
 				\begin{multicols}{2}
 					Consider the contours $\gamma$ (black) and $\gamma'$ (dashed) in the figure. Suppose that $f$ is analytic in a domain containing $\gamma$ and $\gamma'$, and the region between these two contours. (In the equations below, $\gamma_1,\:\gamma'_1$ denote the parts of the contours 'above' $\rho_1,\:\rho_2$ and $\gamma_2,\:\gamma'_2$ denote the parts of the contours 'below' $\rho_1,\:\rho_2$). By Cauchy's Integral Theorem
 					\begin{figure}[H]
-					\flushright
+					\centering
 						\begin{tikzpicture}
 							\begin{axis}
 								[
@@ -1570,7 +1570,7 @@
 				\end{align*}
 				where $\gamma$ is as in the figure.
 				\begin{figure}[H]
-					\flushright
+					\centering
 						\begin{tikzpicture}
 							\begin{axis}
 								[
@@ -2041,7 +2041,7 @@
 			\end{align*}
 			\begin{enumerate}[label=(\roman*)]
 				\item Ratio test: If the limit $\displaystyle L = \lim\limits_{j\to\infty} \frac{|a_{j+1}|}{|a_j|}$ exists, then $R=1/L$.
-				\item Root test: If the limit $\displaystyle L = \lim\limits_{j\to\infty} ^j\sqrt{|a_j|}$ exists, then $R=1/L$.\\
+				\item Root test: If the limit $\displaystyle L = \lim\limits_{j\to\infty} \sqrt[j]{|a_j|}$ exists, then $R=1/L$.\\
 			\end{enumerate}
 		\end{thm}
 
@@ -2050,7 +2050,7 @@
 				\item In both cases, it is understood that $R=+\infty$ of $L=0$ and that $R=0$ if $L=+\infty$.
 				\item In fact, the following formula, due to Hadamard, is true for any power series:
 				\begin{align*}
-					R = \frac{1}{\lim\limits_{j\to\infty}\sup(^j\sqrt{|a_j|})}.
+					R = \frac{1}{\lim\limits_{j\to\infty}\sup(\sqrt[j]{|a_j|})}.
 				\end{align*}
 			\end{enumerate}
 		\end{rem}
@@ -2356,7 +2356,7 @@
 				\end{align*}
 				Let $g(z)=[a_m+a_{m+1}(z-z_0)+\ldots]$ which is analytic near $z_0$ and $g(z_0)=a_m\not=0$. Taylor expanding $g$ we find that $f$ has power series representation
 				\begin{align*}
-					f(z) = g(z_0)(z-z_0)^m + g'(z_0)(z-z_0)^{m-1}+\ldots
+					f(z) &= g(z_0)(z-z_0)^m + g'(z_0)(z-z_0)^{m-1}+\ldots
 					\intertext{The coefficients are $\dfrac{f^{(j)}(z_0)}{m!}$, hence}
 					\frac{f^{(j)}(z_0)}{j!} &= 0,\quad j=0,1,\ldots,m-1\\
 					\frac{f^{(m)}(z_0)}{m!} &= g(z_0) \not=0.
@@ -2572,11 +2572,577 @@
 		% subsection the_residue_calculus (end)
 		\subsection{Calculations of Integrals} % (fold)
 		\label{sub:calculations_of_integrals}
-			Trigonometric integrals can sometimes be integrated using residues calculus\\
+			Trigonometric integrals can sometimes be integrated using residues calculus:\\
 
 			\begin{example}
-				
+				Suppose you want to compute $\displaystyle I = \int\limits_{0}^{2\pi}\frac{\sin^2(\theta)}{5+4\cos(\theta)}d\theta$.
+
+				Solution: Put $z=e^{i\theta}$. Then, clearly $e^{-i \theta} = \frac{1}{z}$, so
+				\begin{align*}
+					\begin{cases}
+						\cos(\theta) = \dfrac{e^{i\theta}+e^{-i\theta}}{2} &= \dfrac{1}{2}\left(z+\dfrac{1}{z}\right)\\[0.3cm]
+						\sin(\theta) = \dfrac{e^{i\theta}-e^{-i\theta}}{2i} &= \dfrac{1}{2i}\left(z- \dfrac{1}{z}\right)
+					\end{cases}
+					,\quad dz = ie^{i\theta}d\theta \iff d\theta = \frac{dz}{iz}
+				\end{align*}
+				\begin{align*}
+					I =  
+					\int\limits_{0}^{2\pi}\frac{\sin^2(\theta)}{5+4\cos(\theta)}d\theta &=
+					\int\limits_{|z|=1}\frac{\frac{1}{2i}\left(z- \frac{1}{z}\right)^2}{5+\frac{4}{2}\left(z+\frac{1}{z}\right)}\frac{dz}{iz} =
+					 - \frac{1}{4i}\int\limits_{|z|=1}\frac{(z^2-1)^2}{z^2(2z^2+5z+2)}dz \\&=
+					 - \frac{1}{4i}\int\limits_{|z|=1}\frac{(z^2-1)^2}{z^2\left(z+\frac{1}{2}\right)\left(z+2\right)}dz
+				\end{align*}
+				$f$ has simple poles at $z= - \frac{1}{2}, 2$, and a double pole at $z=0$. Only $z=0, - \frac{1}{2}$ contribute ti the integral, so:
+				\begin{align*}
+					 \Rightarrow I &= 2\pi i\left[\mathrm{Res}\left(f,- \frac{1}{2}\right)+\mathrm{Res}(f,0)\right]\cdot - \frac{1}{4i}.
+					 \intertext{By the residue Theorem:}
+					 \mathrm{Res}\left(f, - \frac{1}{2}\right) &= 
+					 \lim\limits_{z\to - \frac{1}{2}}\left(z+\frac{1}{2}\right)f(z) =
+					 \lim\limits_{z\to - \frac{1}{2}}\frac{(z^2-1)^2}{z^2(z+2)} = \frac{3}{4}\\
+					 \mathrm{Res}\left(f, 0\right) &= 
+					 \lim\limits_{z\to 0}\frac{1}{1!}\frac{d}{dz}\left[z^2f(z)\right] = 
+					 \lim\limits_{z\to 0}\frac{d}{dz}\left[\frac{(z^2-1)^2}{2z^2+5z+2}\right] = \\ &=
+					 \frac{2(z^2-1) 2z(2z^2+5z+2)-(z^2-1)^2(4z+5)}{(2z^2+5z+2)^2}\Bigg|_{z=0}\\ &=
+					 - \frac{5}{4}.\\\\
+					 \Rightarrow I &= - \frac{1}{4i}\frac{2\pi i}{2}\left(\frac{3}{4}-\frac{5}{4}\right) = - \frac{\pi}{2}\cdot - \frac{2}{4} = \frac{\pi}{4}.
+				\end{align*}
 			\end{example}
+
+			Integrals over $\mathbb{R}$ an often be computed by considering a contour in, say, the upper half-plane.\\
+
+			\begin{example}
+				Compute the integral $I=\int\limits_{-\infty}^{\infty}\frac{x^2}{(x^2+1)^2}dx.$
+
+				Solution: Let $f(z) = \frac{z^2}{(z^2+1)^2}$. Also, let $\Gamma_R = [-R,R]\cup C_R^+$, where $C_R^+$ is a half-circle in the upper half-plane of radius $R>1$. By t he residue theorem, we then have:
+				\begin{align*}
+					\int\limits_{\Gamma_R}f(z)dz &= \int\limits_{-R}^{R}f(x)dx + \int\limits_{C_R^+}f(z)dz = 2\pi i \mathrm{Res}(f,i).
+				\end{align*}
+				Since $z=i$ is a pole of order 2,
+				\begin{align*}
+					\mathrm{Res}(f,i) &= 
+					\lim\limits_{z\to i}\frac{1}{1!}\frac{d}{dz}[(z-i)^2f(z)] =
+					\frac{d}{dz}\frac{z^2}{(z+i)^2}\Bigg|_{z=i} =
+					\frac{2z(z+i)^2-z^2 2(z+i)}{(z+i)^4}\Bigg|_{z=i}\\ &=
+					\frac{2i\cdot 2i -(-1)\cdot 2}{-8i} = \frac{1}{4i}
+				\end{align*}
+				Thus  the integral over $\Gamma_R$ is equal to $\frac{\pi}{2}$. But
+				\begin{align*}
+					\left|\int\limits_{C_R^+}f(z)dz\right| &\le \max\limits_{z\in C_R^+}|f(z)|\cdot l(C_R^+) 
+					\text{ and }
+					|f(z)| = \left|\frac{z^2}{(z^2+1)^2}\right| = \frac{|z^2|}{|z^2+1|^2}.\\
+					\frac{|z^2|}{|z^2+1|^2} &\le \frac{|z^2|}{||z^2|-|1||^2} = \frac{R^2}{(R^1-1)^2},\:z\in C_R^+\\
+					\Rightarrow \left|\int\limits_{C_R^+}f(z)dz\right| &\le \frac{R^2}{(R^2-1)^2}\pi R \to 0,\:R\to\infty.
+				\end{align*}
+				So, letting $R\to\infty$, we obtain
+				\begin{align*}
+					\int\limits_{-\infty}^{\infty}f(x)dx = 
+					\lim\limits_{R\to\infty}\int\limits_{-R}^{R}f(x)dx = \frac{\pi}{2}
+				\end{align*}
+			\end{example}
+
+			\begin{rem}
+				The same method can be used to calculate any integral on the form
+				\begin{align*}
+					\int\limits_{-\infty}^{\infty}\frac{P(x)}{Q(x)}dx,\:\deg(Q)\le\deg{P}+2,\:Q\not=0\text{ on }\mathbb{R}.
+				\end{align*}
+			\end{rem}
+
+			\begin{example}
+				Compute $\displaystyle I=\int\limits_{-\infty}^{\infty}\frac{\cos(3x)}{x^2+1}dx$
+
+				Solution: It is tempting to consider $\frac{\cos(3z)}{z^2+1}$, but it holds that $\cos(3z)=\frac{e^{i3z}+e^{-i3z}}{2}$. Since $|e^{i3z}|=e^{-3y}$ and $|e^{-i3z}| = e^{3y}$, we \underline{cannot} proceed as in the previous example. We can, however, use that
+				\begin{align*}
+					I= 
+					\frac{1}{2}\int\limits_{-\infty}^{\infty}\frac{e^{i3x}}{x^2+1}dx+ 
+					\frac{1}{2}\int\limits_{_\infty}^{\infty}\frac{e^{-i3x}}{x^2+1}dx:= 
+					I_1+I_2.
+				\end{align*}
+				\begin{multicols}{2}
+					One can compute $I_1$ by considering
+					\begin{align*}
+						\int\limits_{\Gamma_R}\frac{e^{i3z}}{z^2+1}dz
+					\end{align*}
+					and similarly for $I_2$. It is easier to note that 
+					\begin{align*}
+						I = \Re \int\limits_{-\infty}^{\infty}\frac{e^{i3x}}{x^2+1}dx.
+					\end{align*}
+					\begin{figure}[H]
+					\centering
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -0.1, ymax = 1.1,
+								xmin = -1.21, xmax = 1.21,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+								]
+
+								\addplot[red, thick, samples=100, domain=0:pi]({cos(deg(x))},{sin(deg(x))}) node at (axis cs:0.5,0.7) {$C_R^+$};
+								\addplot[blue, thick, samples = 100, domain = -1:1]{0} node at (axis cs:-0.5,0.2) {$[-R,R]$};
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				Therefore, let $f(z) = \frac{e^{i3z}}{z^2+1}$ and consider the integral of $f(z)$ over $\Gamma_R$ (See Figure). Arguing as before:
+				\begin{align*}
+					\lim\limits_{R\to\infty}\int\limits_{-R}^{R}f(x)dx = 
+					2\pi i \mathrm{Res}(f(z),i) =
+					2\pi i \frac{e^{i3\cdot i}}{2z}\Bigg|_{z=i} =
+					\frac{\pi}{e^3}.
+				\end{align*}
+				Taking real part, we get that $I = \Re \pi e^{-3} = \pi e^{-3}$.\\
+			\end{example}
+
+			\begin{rem}
+				Integrals of the form
+				\begin{align*}
+					\int\limits_{\mathbb{R}}f(x)e^{-i\omega x}dx
+				\end{align*}
+				are important in Fourier analysis.
+			\end{rem}
 		% subsection calculations_of_integrals (end)
 	% section integral_calculations_using_residue_calculus (end)
+	\section{More About Integral Calculations} % (fold)
+	\label{sec:more_about_integral_calculations}
+		Recall the last example from the previous chapter, and suppose now that we would like to compute
+		\begin{align*}
+			\int\limits_{-\infty}^{\infty}\frac{x\sin(x)}{x^2+1}dx = 
+			\Im \int\limits_{-\infty}^{\infty}\frac{xe^{ix}}{x^2+1}dx
+		\end{align*}
+		using the previous method. Then we want to show that the following integral
+		\begin{align*}
+			\lim\limits_{R\to\infty}\int\limits_{C_R^+}\frac{ze^{iz}}{z^2+1}dz = 0.
+		\end{align*}
+		The previous rough estimate using $|e^{iz}|\le e^{-y}<l$ only shows that
+		\begin{align*}
+			\left|\int\limits_{C_R^+}\frac{ze^{iz}}{z^2+1}dz \right|\le \frac{R}{R^2-1}\pi R \le c\in \mathbb{R}.
+		\end{align*}
+
+		A more accurate estimate shows the following result:\\
+
+		\begin{thm}[Jordan's Lemma]
+			Suppose $m>0$, and that $P,Q$ are polynomials s.th. $\deg(Q)\ge \deg(P)+1$. Then
+			\begin{align*}
+				\lim\limits_{R\to\infty}\int\limits_{C_R^+}\frac{e^{imz}P(z)}{Q(z)}dz = 0
+			\end{align*}
+			where $C_R^+$ is the upper half of a circle with radius $R$ centered at the origin.
+		\end{thm}
+
+		\begin{proof}
+			Parameterize $C_R^+$ by $z(t) = Re^{it},\:t\in[0,\pi]$
+			\begin{align*}
+				\left|\int\limits_{C_R^+}e^{imz}\frac{P(z)}{Q(z)}dz\right| &\le
+				\left|\int\limits_{0}^{\pi}e^{imRe^{it}}\frac{P(Re^{it})}{Q(Re^{it})}iRe^{it}dt\right| \le
+				\int\limits_{0}^{\pi}\left|e^{imR(\cos(t)+i\sin(t))}\frac{P(Re^{it})}{Q(Re^{it})}iRe^{it}dt\right|\\ &\le
+				\left\{\left|\frac{P(Re^{it})}{Q(Re^{it})}\right|\le \frac{K}{R}\text{ for some $k$ if $R$ is large}\right\} \\ &\le
+				\frac{k}{R}\int\limits_{0}^{\pi}e^{-mR\sin(t)}Rdt =
+				k\int\limits_{0}^{\pi}e^{-imR\sin(t)}dt. \\\\ \Rightarrow&\quad\:\:
+				2\int\limits_{0}^{\frac{\pi}{2}}e^{-imR\sin(t)}dt \le 
+				2\int\limits_{0}^{\frac{\pi}{2}}e^{-imR \frac{\pi}{2}t}dt= 
+				2\left[- \frac{\pi}{2mR}e^{-mR \frac{\pi}{2}}\right]_0^{\frac{\pi}{2}}\\ &=
+				\frac{\pi}{mR}\left(1-e^{-mR}\right) \le
+				\frac{\pi}{mR}.\\\\ \Rightarrow 
+				\left|\int\limits_{C_R^+}e^{imz}\frac{P(z)}{Q(z)}dz\right| &\le
+				\frac{k\pi}{mR}\to 0,\:R\to\infty.
+			\end{align*}
+		\end{proof}
+
+		\begin{rem}
+			The inequality
+			\begin{align*}
+				\int\limits_{0}^{\pi}e^{-R\sin(\theta)}d\theta \le \frac{\pi}{R}
+			\end{align*}
+			is usually called the 'Jordan inequality'.\\
+		\end{rem}
+
+		\begin{example}
+			Compute the integral
+			\begin{align*}
+				I = \int\limits_{-\infty}^{\infty}\frac{x\sin(x)}{x^2+1}dx.
+			\end{align*}
+
+			Solution: Let $\displaystyle I = \Im\int\limits_{-\infty}^{\infty}\frac{xe^{ix}}{x^2+1}dx$. Put $\displaystyle f(z) = \frac{ze^{iz}}{z^2+1}$ and consider
+			\begin{align*}
+				\int\limits_{\Gamma_R}f(z)dz &\text{ over the same $\Gamma_R$ as before.}\\
+				\int\limits_{\Gamma_R}f(z)dz &= 
+				\int\limits_{-R}^{R}f(x)dx + \int\limits_{C_R^+}f(z)dz = 
+				2\pi i \mathrm{Res}(f,i)\\  &= 
+				2\pi i \frac{ie^{i\cdot i}}{2i} = \frac{i\pi}{e}.\\ I &=
+				\Im\left(\frac{i\pi}{e}\right) = \frac{\pi}{e}.
+			\end{align*}
+		\end{example}
+		\subsection{Principal Values} % (fold)
+		\label{sub:principal_values}
+			Recall from calculus the following definition:
+
+			\begin{definition}
+				Suppose that $f$ is continuous on $\mathbb{R}$. We say that the improper integral
+				\begin{align*}
+					\int\limits_{-\infty}^{\infty}f(x)dx&\text{ is convergent if}
+					\begin{cases}
+						\displaystyle\lim\limits_{a\to-\infty}\int\limits_{a}^{0}f(x)dx\\[0.3cm]
+						\displaystyle\lim\limits_{b\to\infty}\int\limits_{0}^{b}f(x)dx
+					\end{cases}\text{ exist.}\\
+					\text{Then } \int\limits_{-\infty}^{\infty}f(x)dx &=
+					\lim\limits_{a\to-\infty}\int\limits_{a}^{0}f(x)dx +
+					\lim\limits_{b\to\infty}\int\limits_{0}^{b}f(x)dx =
+					\lim\limits_{R\to\infty}\int\limits_{-R}^{R}f(x)dx.
+				\end{align*}
+			\end{definition}
+
+			\begin{definition}
+				Suppose that $f$ is continuous on $\mathbb{R}$ as before. The principal value of 
+				\begin{align*}
+					\int\limits_{-\infty}^{\infty}f(x)dx
+					\text{ is defined as }
+					PV\int\limits_{-\infty}^{\infty}f(x)dx =
+					\lim\limits_{R\to\infty}\int\limits_{-R}^{R}f(x)dx.
+				\end{align*}
+				Provided that the limit exists.\\
+			\end{definition}
+
+			\begin{rem}
+				\begin{enumerate}
+					\item $PV$ may exist, even if the integral is not convergent.
+					\item One can show that
+					\begin{align*}
+						\int\limits_{-\infty}^{\infty}\frac{e^{imx}P(x)}{Q(x)}dz
+					\end{align*}
+					is convergent for $m\not=0$ provided that $\deg(Q)\ge \deg(P)+1,\:Q(x)\not=0$ on $\mathbb{R}$.\\
+				\end{enumerate}
+			\end{rem}
+
+			\begin{definition}
+				Let $a\le x_0<b$ and suppose that $f$ is continuous for $a\le x\le x_0$ and for $x_0<x\le b$ (i.e. continuous on $[a,b]\setminus\{x_0\}$). Then the principal value of 
+				\begin{align*}
+					\int\limits_{a}^{b}f(x)dx =
+					PV\int\limits_{a}^{b}f(x)dx =
+					\lim\limits_{\varepsilon\to 0^+}\left(\int\limits_{a}^{x_0- \varepsilon}f(x)dx+\int\limits_{x_0+\varepsilon}^{b}f(x)dx\right).
+				\end{align*}
+			\end{definition}
+
+			\begin{example}
+				We want to compute
+				\begin{align*}
+					I=
+					PV\int\limits_{-\infty}^{\infty}\frac{e^{ix}}{x}dx =
+					\lim\limits_{R\to\infty}\lim\limits_{\varepsilon\to 0^+}
+					\left(\int\limits_{-R}^{-\varepsilon}\frac{e^{ix}}{x}dx + 
+					\int\limits_{\varepsilon}^{R}\frac{e^{ix}}{x}dx\right).
+				\end{align*}
+				\begin{multicols}{2}
+					It seems natural to let $f(z)=\frac{e^{iz}}{z}$ and consider
+					\begin{align*}
+						\int\limits_{\Gamma_{R,\varepsilon}}f(z)dz
+					\end{align*}
+					with $\Gamma_{R,\varepsilon}$ as in figure. We then want to compute the limit
+					\begin{align*}
+						\lim\limits_{\varepsilon\to 0^+}\int\limits_{C_\varepsilon}f(z)dz
+					\end{align*}
+					\begin{figure}[H]
+					\centering
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -0.1, ymax = 1.3,
+								xmin = -1.1, xmax = 1.1,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+								]
+
+								\addplot[red, thick, samples=100, domain=0:pi]
+									({cos(deg(x))},{sin(deg(x))}) node at (axis cs:0.5,0.7) {$C_R$};
+
+								\addplot[red, thick, samples=100, domain=0:pi]
+									({0.1*cos(deg(x))},{0.1*sin(deg(x))}) node at (axis cs:0.1,0.2) {$C_\varepsilon$};
+
+								\draw node at(axis cs:0.8,0.8) {$\Gamma_{R,\varepsilon}$};
+								\addplot[red, thick, domain=-1:-0.1]{0};
+								\addplot[red, thick, domain=1:0.1]{0};
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				We then want to compute the limit
+				\begin{align*}
+					\lim\limits_{\varepsilon\to 0^+}\int\limits_{C_\varepsilon}f(z)dz.
+				\end{align*}
+			\end{example}
+
+			\begin{thm}[The Fractional Residue Theorem]
+				Suppose $z_0$ is a simple pole of $f(z)$ and that $C_\varepsilon$ is the circular arc $C_\varepsilon := z_0+\varepsilon e^{i\theta},\: \theta\in[\theta_1,\theta_2]$. Then
+				\begin{align*}
+					\lim\limits_{\varepsilon\to 0^+}\int\limits_{C_\varepsilon}f(z)dz = 
+					i(\theta_2-\theta_1)\mathrm{Res}(f,z_0).
+				\end{align*}
+			\end{thm}
+
+			\begin{proof}
+				As $f$ has a simple pole at $z_0$, we know that
+				\begin{align*}
+					f(z) &= \frac{a_{-1}}{z-z_0}+g(z),\text{ where $g$ is analytic in a disk about $z_0$.}\\
+					\Rightarrow \int\limits_{C_\varepsilon}f(z)dz &= 
+					a_{-1}\int\limits_{C_\varepsilon}\frac{1}{z-z_0}dz +
+					\int\limits_{C_\varepsilon}g(z)dz.
+				\end{align*}
+				\begin{enumerate}
+					\item ~\\[-1cm]
+					\begin{align*}
+						\displaystyle\int\limits_{C_\varepsilon}\frac{1}{z-z_0}dz = \int\limits_{\theta_1}^{\theta_2}\frac{1}{\varepsilon e^{i\theta}}i \varepsilon e^{i\theta}d\theta = i(\theta_2-\theta_1).
+					\end{align*}
+					\item ~\\[-1cm]
+					\begin{align*}
+						|g(z)|&\le M,\quad z\in C_\varepsilon\text{ if $\varepsilon$ is small.}\\ \Rightarrow
+						\left|\int\limits_{C_\varepsilon}g(z)dz\right|&\le M \varepsilon(\theta_2-\theta_1)\to 0,\: \varepsilon\to 0^+.
+					\end{align*}
+				\end{enumerate}
+			\end{proof}
+
+			Thus,
+			\begin{align*}
+				\lim\limits_{\varepsilon\to 0^+}\int\limits_{C_\varepsilon}f(z)dz &= i(\theta_2-\theta_1)\mathrm{Res}(f,z_o),\quad f(z) = \frac{e^{iz}}{z} \\ \Rightarrow 
+				\int\limits_{\Gamma_{R,\varepsilon}}f(z)dz &= 0\:\forall R,\varepsilon>0
+			\end{align*}
+			since $f$ is analytic inside and on $\Gamma_{R,\varepsilon}$. Hence,
+			\begin{align*}
+				\Rightarrow I &+ (-i\pi)\mathrm{Res}(f,0)+0 = 0\\
+				\Rightarrow I &= i\pi\mathrm{Res}(f,0) = i\pi.
+			\end{align*}
+
+			\begin{rem}
+				It follows that
+				\begin{align*}
+					2\int\limits_{0}^{\infty}\frac{\sin(x)}{x}dx &=
+					PV\int\limits_{-\infty}^{\infty}\frac{\sin(x)}{x}dx =
+					\Im\left(\int\limits_{-\infty}^{\infty}\frac{e^{ix}}{x}dx\right) = \pi\\
+					\Rightarrow \int\limits_{-\infty}^{\infty}\frac{\sin(x)}{x}dx &= \frac{\pi}{2}.
+				\end{align*}
+			\end{rem}
+		% subsection principal_values (end)
+	% section more_about_integral_calculations (end)
+	\section{Some More Examples of Integral Calculations} % (fold)
+	\label{sec:some_more_examples_of_integral_calculations}
+		\subsection{Integrals With Branch Points} % (fold)
+		\label{sub:integrals_with_branch_points}
+			\begin{example}
+				Compute $\displaystyle I=\int\limits_{0}^{\infty}\frac{x^{-a}}{z+1}dx$, $0<a<1$.
+
+				Solution: We want to compute the following:
+				\begin{align*}
+					I = \lim\limits_{R\to\infty}\lim\limits_{\varepsilon\to 0^+}\int\limits_{\varepsilon}^{R}\frac{x^{-a}}{x+1}dx
+				\end{align*}
+				Let $z^{-a}$ be the branch given as follows:
+				\begin{align*}
+					z^{-a} = e^{-a\log(z)} = e^{-a(\ln r +i\theta)} = r^{-a}e^{-ia\theta},\:0<\theta<2\pi.
+				\end{align*}
+				Then $z^{-a}$ is analytic in $\mathbb{C}\setminus[0,\infty)$. 
+				\begin{multicols}{2}
+					Now let $f(z) = \dfrac{z^{-a}}{z+1} = \dfrac{r^{-a}e^{-ia\theta}}{re^{i\theta}+1}$ and consider
+					\begin{align*}
+						\int\limits_{\Gamma_{R,\varepsilon}}f(z)dz,\:\Gamma_R,\varepsilon\text{ as in figure}.
+					\end{align*}
+					We use $\theta=0$ in the upper and $\theta=2\pi$ on the lower side of the segment $[\varepsilon,R]$. So we have
+					\begin{figure}[H]
+					\centering
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -1.1, ymax = 1.1,
+								xmin = -1.1, xmax = 1.1,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+								]
+
+								\addplot[red, thick, samples=100, domain=0.02:2*pi-0.02]
+									({cos(deg(x))},{sin(deg(x))}) node at (axis cs:0.5,0.7) {$C_R$};
+
+								\addplot[red, thick, samples=100, domain=0.08:2*pi-0.08]
+									({0.1*cos(deg(x))},{0.1*sin(deg(x))}) node at (axis cs:0.1,0.2) {$C_\varepsilon$};
+
+								\draw node at(axis cs:0.8,0.8) {$\Gamma_{R,\varepsilon}$};
+								\addplot[red, thick, domain=0.1:1]{0.02};
+								\addplot[red, thick, domain=0.1:1]{-0.02};
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				\begin{align*}
+					f(z) &= \frac{r^{-a}}{r+1} = \frac{x^{-a}}{x+1} \text{ on the 'upper segment', and similarly}\\
+					f(z) &= \frac{r^{-a}e^{-ia2\pi}}{r+1} = \frac{x^{-a}e^{-ia2\pi}}{x+1}\text{ on the 'lower segment'}.
+				\end{align*}
+				Bu the residue theorem, we have that
+				\begin{align*}
+					\int\limits_{\varepsilon}^{R}\frac{x^{-a}}{x+1}dx + \int\limits_{C_R}f(z)dz + \int\limits_{R}^{\varepsilon}\frac{x^{-a}e^{-ia2\pi}}{x+1}dx + \int\limits_{C_\varepsilon}f(z)dz = 2\pi i \mathrm{Res}(f,-1)\tag*{$(*)$}
+				\end{align*}
+				Note that $f$ has a simple pole at $z=-1$, so $\mathrm{Res}(f,-1) =\lim\limits_{z\to -1}(z+1)f(z) = z^{-a}=e^{-ia\pi}$.
+
+				So, from $(*)$, 
+				\begin{align*}
+					(1-e^{-ia2\pi})\int\limits_{\varepsilon}^{R}\frac{x^{-a}}{x+1}dx + \int\limits_{C_R}f(z)dz + \int\limits_{C_\varepsilon}f(z)dz = 2\pi ie^{-ia\pi}\tag*{$(**)$}
+				\end{align*}
+				But
+				\begin{align*}
+					\left|\int\limits_{C_R}f(z)dz\right| &\le \frac{R^{-a}}{R-1}2\pi R\to 0,\quad R\to \infty\\
+					\left|\int\limits_{C_\varepsilon}f(z)dz\right| \le \frac{\varepsilon^{-a}}{1- \varepsilon}2\pi \varepsilon \to 0,\quad \varepsilon\to0^+.
+				\end{align*}
+				If we let $R\to +\infty,\:\varepsilon\to 0^+$ in $(**)$, we see that
+				\begin{align*}
+					I = \frac{2\pi i e^{-ia\pi}}{1-e^{-ia2\pi}} = \frac{2\pi}{e^{ia\pi}-e^{-ia\pi}} = \frac{\pi}{\sin(a\pi)}.
+				\end{align*}
+			\end{example}
+
+			\begin{example}
+				Compute $\displaystyle I =\int\limits_{0}^{\infty}\frac{dx}{(x+1)(x^2+2x+1)}$.
+
+				This takes a trick! (or real analysis!). Let $\log(z)$ be the branch of the logarithm as in the previous problem.
+				\begin{align*}
+					\log(z) = \ln|z| + i\theta,\:\theta\in[0,2\pi)
+				\end{align*}
+				Now, let
+				\begin{align*}
+					f(z) = \frac{\log(z)}{(z+1)(z^2+2z+2)} \text{ and consider }\int\limits_{\Gamma_R,\varepsilon}f(z)dz
+				\end{align*}
+				where $\Gamma_R,\varepsilon$ as in the previous problem. If we sum the contributions from the upper and lower side of the segment $[\varepsilon,R)$, the terms containing logarithms cancel.
+				\begin{align*}
+					\int\limits_\varepsilon^{R}\frac{\log(x)}{(x+1)(x^2+2x+2)}dx &+ 
+					\int\limits_R^{\varepsilon}\frac{\log(x)+2\pi i}{(x+1)(x^2+2x+2)}dx  =
+					-2\pi i\int\limits_\varepsilon^{R}\frac{1}{(x+1)(x^2+2x+2)}dx\\ &=
+					-2\pi i I,\text{ as $R\to\infty$ and $\varepsilon\to 0^+$. It holds that}\\
+					\left|\int\limits_{C_R}\frac{\log(z)}{(z+1)(z^2+2z+2)}dz\right| &\le \frac{\ln R + 2\pi}{(R-1)(R^2-2R-2)}2\pi R \to 0,\text{as $R\to\infty$}\\
+					\left|\int\limits_{C_\varepsilon}\frac{\log(z)}{(z+1)(z^2+2z+2)}dz\right| &\le \frac{\ln \varepsilon + 2\pi}{(1- \varepsilon)(2-2 \varepsilon- \varepsilon^2)}2\pi \varepsilon \to 0,\text{as $\varepsilon\to0^+$}.
+				\end{align*}
+				Note that $f$ has poles at $z=-1$ and $z=-1\pm i$, and that $\displaystyle f(z) = \frac{\log(z)}{(z+1)(z-(-1-i))(z-(-1+i))}$. The residue theorem gives, after taking limits, that
+				\begin{align*}
+					-2\pi i I &= 
+					2\pi i \sum \mathrm{Res}(f,z_i) = 
+					2\pi i(\mathrm{Res}(f,-1)+\mathrm{Res}(f,-1-i)+\mathrm{Res}(f,-1+i))\\ \iff I &=
+					-\left(\frac{i\pi}{1}+\frac{\ln(\sqrt{2})+\frac{i3\pi}{4}}{-2}+\frac{\ln(\sqrt{2})+\frac{i5\pi}{4}}{-2}\right) = \frac{\ln(2)}{2}.
+				\end{align*}
+			\end{example}
+
+			\begin{rem}
+				The same idea works if you would like to compute
+				\begin{align*}
+					\int\limits_{0}^{\infty}\frac{P(x)}{Q(x)}dx,\:\deg{(Q)}\ge \deg{(P)}+2,\:Q\not=0\text{ on }[0,\infty).
+				\end{align*}
+			\end{rem}
+
+			\begin{example}
+				Compute $\displaystyle I= \int\limits_{0}^{\infty} \frac{1}{x^3+1}dx$
+
+				\begin{multicols}{2}
+					Solution: Let $\displaystyle f(z) = \frac{1}{z^3+1}$ and consider 
+					\begin{align*}
+						\int\limits_{\Gamma_R}f(z)
+					\end{align*}
+					with $\Gamma_R$ as in figure. Choose $\alpha=2\pi/3,\:R>1$.
+					\begin{figure}[H]
+					\centering
+						\begin{tikzpicture}
+							\begin{axis}
+								[
+								% height = \textwidth,
+								% width = \textwidth,
+								ymin = -0.5, ymax = 1.1,
+								xmin = -1.1, xmax = 1.1,
+								ytick = \empty,
+								xtick= \empty,
+								% xlabel = $\mathfrak{Re}$,
+								% ylabel = $\mathfrak{Im}$,
+								tikzDefaults,
+								axis equal image,
+								% axis lines = none,
+								]
+
+								\addplot[red, thick, samples=100, domain=0:2*pi/3]
+									({cos(deg(x))},{sin(deg(x))}) node at (axis cs:0.5,0.7) {$\Gamma_2$};
+
+								\addplot[red, thick, dashed, samples=100, domain=0:2*pi/3]
+									({0.1*cos(deg(x))},{0.1*sin(deg(x))}) node at (axis cs:0.1,0.2) {$\alpha$};
+
+								% \draw node at(axis cs:0.8,0.8) {$\Gamma_{R,\varepsilon}$};
+								\addplot[red, thick, domain=0:1]{0} node at (axis cs:0.5,-0.2) {$\Gamma_1$};
+								% \addplot[red, thick, domain=0.1:1]{-0.02};
+								\draw[red, thick] (axis cs:0,0) -- (axis cs:-0.5,0.866) node at (axis cs:-0.43,0.3) {$\Gamma_3$};
+
+							\end{axis}
+						\end{tikzpicture}
+					\end{figure}
+				\end{multicols}
+				Note that
+				\begin{align*}
+					\int\limits_{\Gamma_3}f(z)dz = 
+					\int\limits_{R}^{0}\frac{1}{r^3e^{i3\alpha}+1}\alpha e^{i\alpha}dr =
+					-e^{i\alpha}\int\limits_{0}^{R}\frac{1}{r^3+1}dr
+				\end{align*}
+				The residue theorem then gives
+				\begin{align*}
+					\int\limits_{\Gamma_R}f(z)dz = 
+					2\pi i \mathrm{Res}(f,e^{i\pi/3}) =
+					2\pi i \frac{1}{3z^2}\Bigg|_{z=e^{i\pi/3}} =
+					\frac{2\pi i}{3e^{i2\pi/3}}.
+				\end{align*}
+				Standard estimate using ML-inequality and taking the limits gives the result:
+				\begin{align*}
+					\Rightarrow (1-e^{i2\pi/3})I =
+					\frac{2\pi i}{3e^{i2\pi/3}} \iff
+					I &= \frac{2\pi i}{3(1-e^{i2\pi/3})e^{i2\pi/3}} = 
+					\frac{2\pi i}{2e^{i\pi/3}(e^{-i\pi/3}-e^{i\pi/3})e^{i2\pi/3}} \\ &=
+					\frac{2\pi i}{3\sin(\frac{\pi}{3})} = \frac{2\pi}{3\sqrt{3}}.
+				\end{align*}
+			\end{example}
+		% subsection integrals_with_branch_points (end)
+	% section some_more_examples_of_integral_calculations (end)
+	\section{The Argument Principle} % (fold)
+	\label{sec:the_argument_principle}
+		\begin{thm}[The Argument Principle]
+			Let $C$ be a simple positively oriented closed contour in $\mathbb{C}$. Suppose that $f$ is analytic and non-zero on this contour. and meromorphic inside $C$. Then
+			\begin{align*}
+				\frac{1}{2\pi i}\int\limits_{C}\frac{f'(z)}{f(z)}dz = N_0(f)-N_p(f)
+			\end{align*}
+			Where $N_0$ and $N_p$ are the number of zeros and poles of $f$  inside $C$ respectively.
+		\end{thm}
+
+		\begin{proof}
+			Let $G(z) = \dfrac{f'(z)}{f(z)}$. The function $G$ is analytic \underline{on} $C$, and has a zero of order $m$ at $z_0\in C$.
+			\begin{align*}
+				\Rightarrow f(z) &= (z-z_0)^mg(z)\text{ where ∞g∞ is analytic and nonzero at $z_0$}\\
+				\Rightarrow f'(z) &= m(z-z_0)^{m-1}g(z) + (z-z_0)^mg'(z)\\
+				\Rightarrow \frac{f'(z)}{f(z)} &= \frac{m}{z-z_0}+ \frac{g'(z)}{g(z)} \Rightarrow\text{$G$ has a simple pole at $z_0$ with residue $m.$}
+				\intertext{If instead $f$ has a pole of order $k$ at $z_p$}
+				\Rightarrow f(z) &= \frac{g(z)}{(z-z_0)^k}\text{ where $g$ is analytic and nonzero at $z_p$.}
+				\intertext{A similar computation shows that}
+				G(z) &= \frac{-k}{(z-z_p)}+\frac{g'(z)}{g(z)}\Rightarrow \text{$G$ has a simple pole at $z_p$ with residue $-k$.}
+			\end{align*}
+			By the residue theorem, 
+			\begin{align*}
+				\int\limits_{C}G(z)dz = \int\limits_{C}\frac{f'(z)}{f(z)}dz = 2\pi i (N_0(f)-N_p(f)).
+			\end{align*}
+		\end{proof}
+
+		\begin{rem}
+			Note that
+		\end{rem}
+	% section the_argument_principle (end)
 \end{document}
